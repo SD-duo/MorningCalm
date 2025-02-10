@@ -317,6 +317,14 @@
 
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/btn_save"
+        android:layout_marginTop="50dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:src="@drawable/save"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -693,14 +701,10 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/btn_save"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:src="@drawable/save"/>
-    <ImageView
         android:id="@+id/btn_initialized"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_marginTop="50dp"
         android:src="@drawable/reset"/>
     <TextView
         android:id="@+id/tv_sum"
