@@ -353,6 +353,7 @@ class Crown : Fragment() {
                 binding.apply {
                     btnPfm.visibility = View.GONE
                     btnMetal.visibility = View.GONE
+                    btnGoldCrown.visibility = View.GONE
                     // A:전치부  B:구치부
                     btnZirA.visibility = View.VISIBLE
                     btnZirB.visibility = View.VISIBLE
@@ -366,6 +367,7 @@ class Crown : Fragment() {
 
                     btnPfm.visibility = View.VISIBLE
                     btnMetal.visibility = View.VISIBLE
+                    btnGoldCrown.visibility = View.VISIBLE
                 }
             }
         }
@@ -881,12 +883,22 @@ class Crown : Fragment() {
             btnPfm.setBackgroundResource(R.drawable.type1)
             btnMetal.setBackgroundResource(R.drawable.type1)
             btnGoldCrown.setBackgroundResource(R.drawable.type1)
+            // 신경치료(Endo) 관련 버튼들
+            btnEndo.setBackgroundResource(R.drawable.type1)
+            btnPost.setBackgroundResource(R.drawable.type1)
+            btnCore.setBackgroundResource(R.drawable.type1)
+            btnMe.setBackgroundResource(R.drawable.type1)
+
             btnZir.visibility = View.GONE
             btnZirA.visibility = View.GONE
             btnZirB.visibility = View.GONE
             btnPfm.visibility = View.GONE
             btnMetal.visibility = View.GONE
             btnGoldCrown.visibility = View.GONE
+            //신경치료 관련 버튼들
+            btnPost.visibility = View.GONE
+            btnCore.visibility = View.GONE
+            btnMe.visibility = View.GONE
 
             // 다른 버튼들...
             btnHybridInlay.visibility = View.GONE
