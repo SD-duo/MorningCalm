@@ -552,13 +552,13 @@
         android:gravity="center">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_Endo"
+            android:id="@+id/btn_Etc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:width="140dp"
             android:height="120dp"
-            android:text="신경치료"
+            android:text="기타"
             android:textSize="35sp"
             android:textStyle="bold"
             android:fontFamily="@font/font13"
@@ -585,11 +585,11 @@
             android:background="@drawable/type1"
             android:visibility="gone"/>
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_Me"
+            android:id="@+id/btn_Endo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="임시"
+            android:text="신경치료"
             android:textStyle="bold"
             android:fontFamily="@font/font13"
             android:background="@drawable/type1"
@@ -710,7 +710,8 @@
         android:gravity="center_vertical"
         android:layout_marginLeft="10dp"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:fontFamily="@font/font13"/>
 
 
 

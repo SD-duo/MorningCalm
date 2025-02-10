@@ -150,6 +150,8 @@ class Crown : Fragment() {
     //특수
     var State_GbrA = false //뼈이식(간단)
     var State_GbrB = false //뼈이식(복잡)
+    //기타
+    var State_Etc = false
 
     var price_Endo: Int = 0
     var price_Post: Int = 0
@@ -408,22 +410,23 @@ class Crown : Fragment() {
             binding.btnGoldCrown.setBackgroundResource(if (State_GoldCrown == true) R.drawable.type2 else R.drawable.type1)
         }
 
-        binding.btnEndo.setOnClickListener {
-            price_Endo = if(price_Endo == 0) 8 else 0
-            binding.btnEndo.setBackgroundResource(if (price_Endo == 8) R.drawable.type2 else R.drawable.type1)
+        binding.btnEtc.setOnClickListener {
+            State_Etc = if(State_Etc == false) true else false
 
-            if(price_Endo == 8){
+            binding.btnEtc.setBackgroundResource(if (State_Etc == true) R.drawable.type2 else R.drawable.type1)
+
+            if(State_Etc == true){
                 binding.apply {
                     btnPost.visibility = View.VISIBLE
                     btnCore.visibility = View.VISIBLE
-                    btnMe.visibility = View.VISIBLE
+                    btnEndo.visibility = View.VISIBLE
                 }
             }
             else{
                 binding.apply {
                     btnPost.visibility = View.GONE
                     btnCore.visibility = View.GONE
-                    btnMe.visibility = View.GONE
+                    btnEndo.visibility = View.GONE
                 }
             }
 
@@ -441,6 +444,13 @@ class Crown : Fragment() {
             price_Core = if (price_Core == 0) 10 else 0
             total_Price += if (price_Core == 10) 10 else -10
             binding.btnCore.setBackgroundResource(if (price_Core == 10) R.drawable.type2 else R.drawable.type1)
+
+        }
+
+        binding.btnEndo.setOnClickListener {
+            price_Endo = if (price_Endo == 0) 8 else 0
+            total_Price += if (price_Endo == 8) 8 else -8
+            binding.btnEndo.setBackgroundResource(if (price_Endo == 8) R.drawable.type2 else R.drawable.type1)
 
         }
 
@@ -884,10 +894,10 @@ class Crown : Fragment() {
             btnMetal.setBackgroundResource(R.drawable.type1)
             btnGoldCrown.setBackgroundResource(R.drawable.type1)
             // 신경치료(Endo) 관련 버튼들
-            btnEndo.setBackgroundResource(R.drawable.type1)
+            btnEtc.setBackgroundResource(R.drawable.type1)
             btnPost.setBackgroundResource(R.drawable.type1)
             btnCore.setBackgroundResource(R.drawable.type1)
-            btnMe.setBackgroundResource(R.drawable.type1)
+            btnEndo.setBackgroundResource(R.drawable.type1)
 
             btnZir.visibility = View.GONE
             btnZirA.visibility = View.GONE
@@ -898,7 +908,7 @@ class Crown : Fragment() {
             //신경치료 관련 버튼들
             btnPost.visibility = View.GONE
             btnCore.visibility = View.GONE
-            btnMe.visibility = View.GONE
+            btnEndo.visibility = View.GONE
 
             // 다른 버튼들...
             btnHybridInlay.visibility = View.GONE
