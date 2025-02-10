@@ -334,7 +334,8 @@
             android:text="임플란트"
             android:textSize="35sp"
             android:textStyle="bold"
-            android:background="@drawable/type1"/>
+            android:background="@drawable/type1"
+            android:fontFamily="@font/font13"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_ostem"
@@ -344,6 +345,7 @@
         android:text="Ostem"
         android:textStyle="bold"
         android:background="@drawable/type1"
+        android:fontFamily="@font/font13"
         android:visibility="gone"/>
         <LinearLayout
             android:id="@+id/Ostem_Crownbox"
@@ -358,6 +360,7 @@
                 android:layout_margin="5dp"
                 android:text="지르코니아"
                 android:textStyle="bold"
+                android:fontFamily="@font/font13"
                 android:background="@drawable/type1" />
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_PfmOs"
@@ -366,6 +369,7 @@
                 android:layout_margin="5dp"
                 android:text="포세린"
                 android:textStyle="bold"
+                android:fontFamily="@font/font13"
                 android:background="@drawable/type1" />
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_MetalOs"
@@ -374,6 +378,7 @@
                 android:layout_margin="5dp"
                 android:text="메탈"
                 android:textStyle="bold"
+                android:fontFamily="@font/font13"
                 android:background="@drawable/type1" />
         </LinearLayout>
 
@@ -386,6 +391,7 @@
             android:layout_margin="5dp"
             android:text="IBS"
             android:textStyle="bold"
+            android:fontFamily="@font/font13"
             android:background="@drawable/type1"
             android:visibility="gone"/>
         <LinearLayout
@@ -401,6 +407,7 @@
                 android:layout_margin="5dp"
                 android:text="지르코니아"
                 android:textStyle="bold"
+                android:fontFamily="@font/font13"
                 android:background="@drawable/type1" />
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_PfmIb"
@@ -409,6 +416,7 @@
                 android:layout_margin="5dp"
                 android:text="포세린"
                 android:textStyle="bold"
+                android:fontFamily="@font/font13"
                 android:background="@drawable/type1" />
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_MetalIb"
@@ -417,6 +425,7 @@
                 android:layout_margin="5dp"
                 android:text="메탈"
                 android:textStyle="bold"
+                android:fontFamily="@font/font13"
                 android:background="@drawable/type1" />
         </LinearLayout>
         <androidx.appcompat.widget.AppCompatButton
@@ -426,6 +435,7 @@
             android:layout_margin="5dp"
             android:text="뼈이식(간단)"
             android:textStyle="bold"
+            android:fontFamily="@font/font13"
             android:background="@drawable/type1"
             android:visibility="gone"/>
         <androidx.appcompat.widget.AppCompatButton
@@ -435,6 +445,7 @@
             android:layout_margin="5dp"
             android:text="뼈이식(복잡)&#10;상악동거상술"
             android:textStyle="bold"
+            android:fontFamily="@font/font13"
             android:background="@drawable/type1"
             android:visibility="gone"/>
 
@@ -458,6 +469,7 @@
             android:text="Crown"
             android:textSize="30sp"
             android:textStyle="bold"
+            android:fontFamily="@font/font13"
             android:background="@drawable/type1" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -467,6 +479,7 @@
             android:layout_margin="5dp"
             android:text="지르코니아"
             android:textStyle="bold"
+            android:fontFamily="@font/font13"
             android:background="@drawable/type1"
             android:visibility="gone"/>
         <androidx.appcompat.widget.AppCompatButton
@@ -475,6 +488,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:text="포세린"
+            android:fontFamily="@font/font13"
             android:textStyle="bold"
             android:background="@drawable/type1"
             android:visibility="gone"/>
@@ -484,6 +498,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:text="메탈"
+            android:fontFamily="@font/font13"
             android:textStyle="bold"
             android:background="@drawable/type1"
             android:visibility="gone"/>
@@ -494,6 +509,7 @@
             android:layout_margin="5dp"
             android:text="골드(X)"
             android:textStyle="bold"
+            android:fontFamily="@font/font13"
             android:background="@drawable/type1"
             android:visibility="gone"/>
         <LinearLayout
@@ -507,6 +523,7 @@
                 android:layout_height="wrap_content"
                 android:text="전치부"
                 android:textStyle="bold"
+                android:fontFamily="@font/font13"
                 android:background="@drawable/type1"
                 android:visibility="gone"/>
 
@@ -517,6 +534,7 @@
                 android:layout_marginTop="5dp"
                 android:text="구치부"
                 android:textStyle="bold"
+                android:fontFamily="@font/font13"
                 android:background="@drawable/type1"
                 android:visibility="gone"/>
 
@@ -543,6 +561,7 @@
             android:text="신경치료"
             android:textSize="35sp"
             android:textStyle="bold"
+            android:fontFamily="@font/font13"
             android:background="@drawable/type1" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -552,6 +571,7 @@
             android:layout_margin="5dp"
             android:text="Post(기둥)"
             android:textStyle="bold"
+            android:fontFamily="@font/font13"
             android:background="@drawable/type1"
             android:visibility="gone"/>
         <androidx.appcompat.widget.AppCompatButton
@@ -561,6 +581,7 @@
             android:layout_margin="5dp"
             android:text="Core"
             android:textStyle="bold"
+            android:fontFamily="@font/font13"
             android:background="@drawable/type1"
             android:visibility="gone"/>
         <androidx.appcompat.widget.AppCompatButton
@@ -570,6 +591,7 @@
             android:layout_margin="5dp"
             android:text="임시"
             android:textStyle="bold"
+            android:fontFamily="@font/font13"
             android:background="@drawable/type1"
             android:visibility="gone"/>
 
