@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">모닝캄치과(수가표)</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="member_first" translatable="false">임플란트/n크라운</string>
+    <string name="member_second" translatable="false">Inventory</string>
+    <string name="member_third" translatable="false">임시1</string>
+    <string name="member_study" translatable="false">임시2</string>
+    <string name="member_study2" translatable="false">임시3</string>
+    <string name="abb" translatable="false">조회</string>
+</resources>

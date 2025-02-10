@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.Fixture">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bg_cody"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:tintMode="src_atop"
+        app:layout_constraintHeight_percent="2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/reset"
+        app:tint="#80000000" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_cody_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@drawable/arrow_left"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_cody"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#EDEDED"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bg_cody"
+        tools:listitem="@layout/fragment_fixture_item" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
