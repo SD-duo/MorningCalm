@@ -1,6 +1,6 @@
 package com.android.myapplication.Service
 
-import com.android.myapplication.Adapter.Mc
+import com.android.myapplication.Data.Mc
 import retrofit2.Call
 import retrofit2.http.GET
 

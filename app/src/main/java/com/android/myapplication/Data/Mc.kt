@@ -1,4 +1,4 @@
-package com.android.myapplication.Adapter
+package com.android.myapplication.Data
 
 
 import com.google.gson.annotations.SerializedName
@@ -16,6 +16,8 @@ class Mc : ArrayList<Mc.McItem>(){
         @SerializedName("length")
         val length: Double?,
         @SerializedName("name")
-        val name: String?
+        val name: String?,
+        @SerializedName("type")
+        val type: String?
     )
 }

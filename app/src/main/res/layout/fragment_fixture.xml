@@ -1,41 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.Fixture">
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/bg_cody"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:tintMode="src_atop"
-        app:layout_constraintHeight_percent="2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/reset"
-        app:tint="#80000000" />
-
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".UI.Inventory">
+    <!-- 뒤로가기 버튼 -->
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_cody_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:src="@drawable/arrow_left"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:src="@drawable/arrow_left" />
 
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_cody"
+    <!-- 상단 배경 이미지 -->
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bg_cody"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
+        android:layout_weight="0.1"
+        android:layout_marginBottom="30dp"
+        android:adjustViewBounds="true"
+        android:tintMode="src_atop"
+        app:srcCompat="@drawable/test2"
+        app:tint="#80000000" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!--IBS[Fixture]//IBS[Abutment]//Osstem[Fixture]//Osstem[Abutment] -->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/material_dynamic_neutral80">
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="IBS &#10;[Fixture]"/>
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="IBS&#10; [Abutment]"/>
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Osstem &#10;[Fixture]"/>
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Osstem &#10; [Abutment]"/>
+
+        </com.google.android.material.tabs.TabLayout>
+
+    </LinearLayout>
+    <!-- 리스트 RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_Material"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.9"
         android:background="#EDEDED"
-        app:layout_constrainedHeight="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bg_cody"
         tools:listitem="@layout/fragment_fixture_item" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

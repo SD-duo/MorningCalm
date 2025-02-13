@@ -1,7 +1,6 @@
-package com.android.maplemate.Data
+package com.android.myapplication.Service
 
 
-import com.android.myapplication.Service.ApiServiceMc
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import de.hdodenhof.circleimageview.BuildConfig

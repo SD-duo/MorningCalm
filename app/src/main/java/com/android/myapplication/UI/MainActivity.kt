@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         binding.viewPager2.apply {
             adapter = viewPagerAdapter
             setCurrentItem(
-                viewPagerAdapter.findFragmentTabIndex(R.string.member_first),
+                viewPagerAdapter.findFragmentTabIndex(R.string.one),
                 false
             )
             setUserInputEnabled(false) //  viewpager 의 슬라이드를 담당하는 메서드

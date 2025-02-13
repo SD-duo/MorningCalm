@@ -5,9 +5,9 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.android.myapplication.Data.MainTabs
 import com.android.myapplication.R
-import com.android.myapplication.UI.Abutment
+import com.android.myapplication.UI.Explain
 import com.android.myapplication.UI.Crown
-import com.android.myapplication.UI.Fixture
+import com.android.myapplication.UI.Inventory
 
 class ViewPager2Adapter(fragmentActivity: FragmentActivity) :
     FragmentStateAdapter(fragmentActivity) {
@@ -15,21 +15,21 @@ class ViewPager2Adapter(fragmentActivity: FragmentActivity) :
         add(
             MainTabs(
                 fragment = Crown(),
-                title = R.string.member_first,
+                title = R.string.one,
                 icon = R.drawable.teeth1,
             )
         )
         add(
             MainTabs(
-                fragment = Fixture(),
-                title = R.string.member_second,
+                fragment = Explain(),
+                title = R.string.three,
                 icon = R.drawable.teeth1,
             )
         )
         add(
             MainTabs(
-                fragment = Abutment(),
-                title = R.string.member_third,
+                fragment = Inventory(),
+                title = R.string.two,
                 icon = R.drawable.teeth1,
             )
         )
@@ -38,17 +38,17 @@ class ViewPager2Adapter(fragmentActivity: FragmentActivity) :
     // HomeFragment의 index를 찾아서 반환해줌
     fun findFragmentTabIndex(name: Int): Int {
         return when (name) {
-            R.string.member_first -> {
+            R.string.one -> {
                 val element = fragments.find { it.title == name }
                 fragments.indexOf(element)
             }
 
-            R.string.member_second -> {
+            R.string.three -> {
                 val element = fragments.find { it.title == name }
                 fragments.indexOf(element)
             }
 
-            R.string.member_third -> {
+            R.string.two -> {
                 val element = fragments.find { it.title == name }
                 fragments.indexOf(element)
             }

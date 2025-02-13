@@ -4,27 +4,23 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.android.maplemate.Data.RetrofitModule
-import com.android.myapplication.Adapter.FixtureAdapter
-import com.android.myapplication.Adapter.Mc
-import com.android.myapplication.BuildConfig
-import com.android.myapplication.R
-import com.android.myapplication.databinding.FragmentCrownBinding
+import com.android.myapplication.Service.RetrofitModule
+import com.android.myapplication.Adapter.IbsFixtureAdapter
+import com.android.myapplication.Data.Mc
 import com.android.myapplication.databinding.FragmentFixtureBinding
+import com.google.android.material.tabs.TabLayout
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.time.LocalDate
 
 
-class Fixture : DialogFragment() {
+class Inventory : DialogFragment() {
     companion object {
 
         fun newinstance():Crown = Crown()
@@ -33,7 +29,7 @@ class Fixture : DialogFragment() {
 
     private var _binding: FragmentFixtureBinding? = null
     private val binding get() = _binding!!
-    private lateinit var codyAdapter: FixtureAdapter
+    private lateinit var ibsfixtureAdapter: IbsFixtureAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +56,48 @@ class Fixture : DialogFragment() {
         initViewModel()
         getMcData()
 
+
+        //텝레이아웃 사용하는 코드
+        //텝레이아웃초기화
+
+        val tabLayout: TabLayout = binding.tabLayout2
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                tab?.let {
+                    when (it.position) {
+                        0 -> binding.rvMaterial.adapter = ibsfixtureAdapter
+//                        1 -> binding.rvMaterial.adapter = ibsabutmentAdapter
+//                        2 -> binding.rvMaterial.adapter = osstemfixtureAdapter
+//                        3 -> binding.rvMaterial.adapter = osstemabutmentAdapter
+                    }
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+                tab?.let {
+                    when (it.position) {
+                        0 -> binding.rvMaterial.adapter = ibsfixtureAdapter
+//                        1 -> binding.rvMaterial.adapter = ibsabutmentAdapter
+//                        2 -> binding.rvMaterial.adapter = osstemfixtureAdapter
+//                        3 -> binding.rvMaterial.adapter = osstemabutmentAdapter
+                    }
+
+                }
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                tab?.let {
+                    when (it.position) {
+                        0 -> binding.rvMaterial.adapter = ibsfixtureAdapter
+//                        1 -> binding.rvMaterial.adapter = ibsabutmentAdapter
+//                        2 -> binding.rvMaterial.adapter = osstemfixtureAdapter
+//                        3 -> binding.rvMaterial.adapter = osstemabutmentAdapter
+                    }
+                }
+            }
+
+        })
+
     }
 
     override fun onResume() {
@@ -80,9 +118,9 @@ class Fixture : DialogFragment() {
         }
     }
     private fun initViewModel() = binding.apply {
-        codyAdapter = FixtureAdapter()
-        rvCody.adapter = codyAdapter
-        rvCody.layoutManager = LinearLayoutManager(context)
+        ibsfixtureAdapter = IbsFixtureAdapter()
+        rvMaterial.adapter = ibsfixtureAdapter
+        rvMaterial.layoutManager = LinearLayoutManager(context)
     }
     private fun getMcData() {
         val service = RetrofitModule.createSonnyApiService()
@@ -98,7 +136,7 @@ class Fixture : DialogFragment() {
                     val itemList = responseBody ?: emptyList<Mc.McItem>()
 
                     // 어댑터에 데이터 설정
-                    codyAdapter.setItems(itemList)
+                    ibsfixtureAdapter.setItems(itemList)
 
                 } else {
                     Log.d("responseError", "Error: ${response.errorBody()?.string()}")
