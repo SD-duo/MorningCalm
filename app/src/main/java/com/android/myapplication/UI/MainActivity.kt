@@ -105,29 +105,29 @@ class MainActivity : AppCompatActivity() {
                     0 -> R.drawable.teeth1
                     1 -> R.drawable.teeth1
                     2 -> R.drawable.teeth1
-                    else -> R.drawable.teeth2
+                    else -> R.drawable.teeth1
                 }
                 tab?.setIcon(icon)
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
-                //반전이미지 만드는법 -> 성환님한테 피그마 물어보기
-                val icon = when (tab?.position) {
-                    0 -> R.drawable.teeth2
-                    1 -> R.drawable.teeth2
-                    2 -> R.drawable.teeth2
 
-                    else -> R.drawable.teeth2
+                val icon = when (tab?.position) {
+                    0 -> R.drawable.teeth1
+                    1 -> R.drawable.teeth1
+                    2 -> R.drawable.teeth1
+
+                    else -> R.drawable.teeth1
                 }
                 tab?.setIcon(icon)
             }
 
             override fun onTabReselected(tab: TabLayout.Tab?) {
                 val icon = when (tab?.position) {
-                    0 -> R.drawable.teeth2
-                    1 -> R.drawable.teeth2
-                    2 -> R.drawable.teeth2
-                    else -> R.drawable.teeth2
+                    0 -> R.drawable.teeth1
+                    1 -> R.drawable.teeth1
+                    2 -> R.drawable.teeth1
+                    else -> R.drawable.teeth1
                 }
                 tab?.setIcon(icon)
             }
