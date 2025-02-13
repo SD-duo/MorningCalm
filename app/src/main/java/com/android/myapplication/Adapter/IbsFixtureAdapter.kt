@@ -39,7 +39,7 @@ class IbsFixtureAdapter() : RecyclerView.Adapter<IbsFixtureAdapter.ViewHolder>()
         fun bindItems(item: Mc.McItem) = binding.apply {
 
             if(item?.category.toString() == "1"){imgOsstemType.load(R.drawable.fixture_ts)}
-            else(imgOsstemType.load(R.drawable.fixture_ss))
+            else(imgOsstemType.load(R.drawable.ibs))
             tvSize.text = item?.diameter.toString() + " ø " + " x " + item?.length.toString() + " mm "
             tvQuantity.text = item?.code
             tvType.text = item?.name
