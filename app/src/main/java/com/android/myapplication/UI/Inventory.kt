@@ -9,37 +9,31 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.android.myapplication.Service.RetrofitModule
 import com.android.myapplication.Adapter.IbsFixtureAdapter
-import com.android.myapplication.Data.Mc
+import com.android.myapplication.ViewModel.InventoryViewModel
 import com.android.myapplication.databinding.FragmentFixtureBinding
 import com.google.android.material.tabs.TabLayout
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+
 
 
 class Inventory : DialogFragment() {
     companion object {
-
-        fun newinstance():Crown = Crown()
-
+        fun newinstance(): Inventory = Inventory()
     }
 
     private var _binding: FragmentFixtureBinding? = null
     private val binding get() = _binding!!
     private lateinit var ibsfixtureAdapter: IbsFixtureAdapter
 
+    private val viewModel: InventoryViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-
-
         }
-
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,55 +48,26 @@ class Inventory : DialogFragment() {
 
         initView()
         initViewModel()
-        getMcData()
-
-
-        //텝레이아웃 사용하는 코드
-        //텝레이아웃초기화
 
         val tabLayout: TabLayout = binding.tabLayout2
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 tab?.let {
-                    when (it.position) {
-                        0 -> binding.rvMaterial.adapter = ibsfixtureAdapter
-//                        1 -> binding.rvMaterial.adapter = ibsabutmentAdapter
-//                        2 -> binding.rvMaterial.adapter = osstemfixtureAdapter
-//                        3 -> binding.rvMaterial.adapter = osstemabutmentAdapter
-                    }
+                    viewModel.filterItems(it.position)  // 탭 선택 시 해당하는 카테고리로 필터링
                 }
             }
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-                tab?.let {
-                    when (it.position) {
-                        0 -> binding.rvMaterial.adapter = ibsfixtureAdapter
-//                        1 -> binding.rvMaterial.adapter = ibsabutmentAdapter
-//                        2 -> binding.rvMaterial.adapter = osstemfixtureAdapter
-//                        3 -> binding.rvMaterial.adapter = osstemabutmentAdapter
-                    }
-
-                }
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-                tab?.let {
-                    when (it.position) {
-                        0 -> binding.rvMaterial.adapter = ibsfixtureAdapter
-//                        1 -> binding.rvMaterial.adapter = ibsabutmentAdapter
-//                        2 -> binding.rvMaterial.adapter = osstemfixtureAdapter
-//                        3 -> binding.rvMaterial.adapter = osstemabutmentAdapter
-                    }
-                }
-            }
-
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
-
     }
 
     override fun onResume() {
         super.onResume()
-        dialog?.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        dialog?.window?.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.MATCH_PARENT
+        )
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.WHITE))
         dialog?.window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
     }
@@ -112,42 +77,23 @@ class Inventory : DialogFragment() {
         _binding = null
 
     }
+
     private fun initView() {
         binding.imgCodyBack.setOnClickListener {
             dismiss()
         }
     }
+
     private fun initViewModel() = binding.apply {
         ibsfixtureAdapter = IbsFixtureAdapter()
         rvMaterial.adapter = ibsfixtureAdapter
         rvMaterial.layoutManager = LinearLayoutManager(context)
+        // ViewModel의 데이터 변화 감지 후 어댑터에 업데이트
+        viewModel.items.observe(viewLifecycleOwner) { newList ->
+            Log.d("InventoryFragment", "Observer triggered! New list size: ${newList.size}") // 확인용 로그 추가
+            ibsfixtureAdapter.setItems(newList)
+        }
+        // API 호출 (최초 한 번만 호출)
+        viewModel.getMcData()
     }
-    private fun getMcData() {
-        val service = RetrofitModule.createSonnyApiService()
-        val call: Call<Mc> = service.getMcdata()
-
-        call.enqueue(object : Callback<Mc> {
-            override fun onResponse(call: Call<Mc>, response: Response<Mc>) {
-                if (response.isSuccessful) {
-                    val responseBody = response.body()
-                    Log.d("Test","${response.body()}")
-
-                    // responseBody가 null일 경우 빈 리스트 반환
-                    val itemList = responseBody ?: emptyList<Mc.McItem>()
-
-                    // 어댑터에 데이터 설정
-                    ibsfixtureAdapter.setItems(itemList)
-
-                } else {
-                    Log.d("responseError", "Error: ${response.errorBody()?.string()}")
-                }
-            }
-
-            override fun onFailure(call: Call<Mc>, t: Throwable) {
-                Log.d("responseError", "Failure: ${t.message}")
-            }
-        })
-    }
-
-
 }
