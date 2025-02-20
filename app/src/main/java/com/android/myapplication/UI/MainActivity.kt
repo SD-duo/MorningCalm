@@ -35,18 +35,7 @@ class MainActivity : AppCompatActivity() {
         pageChangeCallBack()
         binding.viewPager2.offscreenPageLimit = viewPagerAdapter.itemCount
 
-
-
-
-
-
-
-
-
-
-
         // 총 비용 업데이트 함수
-
 
     }
     private fun viewPager2State() {
