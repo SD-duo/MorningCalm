@@ -15,7 +15,7 @@ class IbsFixtureAdapter : RecyclerView.Adapter<IbsFixtureAdapter.ViewHolder>() {
     fun setItems(items: List<Mc.McItem>) {
         Log.d("IbsFixtureAdapter", "Adapter updated, new size: ${items.size}")
         this.items.clear()
-        this.items.addAll(items)
+        this.items.addAll(items.filter { it.category == "1" })
         notifyDataSetChanged()
     }
 
@@ -38,10 +38,7 @@ class IbsFixtureAdapter : RecyclerView.Adapter<IbsFixtureAdapter.ViewHolder>() {
         RecyclerView.ViewHolder(binding.root) {
 
         fun bindItems(item: Mc.McItem) = binding.apply {
-            when(item.category){
-                "1" -> imgOsstemType.load(R.drawable.fixture_ss)
-                "2" -> imgOsstemType.load(R.drawable.fixture_ts)
-            }
+            imgOsstemType.load(R.drawable.ibs)
             tvSize.text = "${item.diameter} ø x ${item.length} mm"
             tvQuantity.text = item.code
             tvType.text = item.name

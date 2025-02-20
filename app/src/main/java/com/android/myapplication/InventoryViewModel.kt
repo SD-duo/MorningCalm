@@ -20,23 +20,7 @@ class InventoryViewModel : ViewModel() {
     // API에서 받은 데이터를 저장하고 필터링을 초기화
     fun setAllItems(items: List<Mc.McItem>) {
         allItems = items
-        filterItems(0)  // 첫 번째 탭에 맞는 데이터로 필터링
-    }
-
-    // 탭 인덱스에 맞게 데이터를 필터링
-    fun filterItems(tabIndex: Int) {
-        val filteredItems = when (tabIndex) {
-            0 -> allItems.filter { it.category == "1" }
-            1 -> allItems.filter { it.category == "2" }
-            2 -> allItems.filter { it.category == "3" }
-            3 -> allItems.filter { it.category == "4" }
-            else -> emptyList()
-        }
-        Log.d("InventoryViewModel", "Filtering for tabIndex: $tabIndex, Found: ${filteredItems.size} items")
-        _items.value = filteredItems
-
-        Log.d("InventoryViewModel", "items LiveData Updated! Size: ${filteredItems.size}")
-
+        _items.value = items
     }
 
 
@@ -51,6 +35,7 @@ class InventoryViewModel : ViewModel() {
                     val responseBody = response.body() ?: emptyList()
 
                     setAllItems(responseBody)  // 데이터 설정
+                    _items.value = responseBody // 🔥 LiveData 업데이트 추가
 
                     Log.d("InventoryViewModel", "API Response: $responseBody")
                 }
