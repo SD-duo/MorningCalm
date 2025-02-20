@@ -49,6 +49,12 @@ class Inventory : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.apply {
+            bgCody.setOnClickListener {
+                viewModel.getMcData()
+            }
+        }
+
 
         // binding 초기화 후 사용
         _binding?.let { binding ->  // binding이 null이 아닌 경우에만 실행

@@ -9,7 +9,7 @@
     android:padding="8dp">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_osstem_type"
+        android:id="@+id/iv_img"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
@@ -25,13 +25,14 @@
         android:layout_marginStart="8dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/img_osstem_type">
+        app:layout_constraintStart_toEndOf="@id/iv_img">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="품목명"
+            android:textStyle="bold"
             android:textSize="14sp" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -44,13 +45,40 @@
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Code"
+            android:textStyle="bold"
+            android:textSize="14sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="수량"
+            android:textStyle="bold"
             android:textSize="14sp" />
 
+
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layout_item2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintStart_toEndOf="@id/layout_item"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/tv_temporary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="임시"/>
+    </LinearLayout>
+>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
