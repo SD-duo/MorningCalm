@@ -18,6 +18,8 @@ class Mc : ArrayList<Mc.McItem>(){
         @SerializedName("name")
         val name: String?,
         @SerializedName("type")
-        val type: String?
+        val type: String?,
+        @SerializedName("quntitiy")
+        val quantitiy: Int
     )
 }
