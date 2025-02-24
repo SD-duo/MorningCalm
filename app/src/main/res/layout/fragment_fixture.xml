@@ -7,13 +7,13 @@
     android:orientation="vertical"
     android:background="@color/white"
     tools:context=".UI.Inventory">
-    <!-- 뒤로가기 버튼 -->
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_cody_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:src="@drawable/arrow_left" />
+    <LinearLayout
+        android:id="@+id/Allview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white">
+
 
     <!-- 상단 배경 이미지 -->
     <androidx.appcompat.widget.AppCompatImageView
@@ -63,5 +63,61 @@
         android:layout_weight="0.9"
         android:background="#EDEDED"
         tools:listitem="@layout/fragment_fixture_item" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/view_Cliked"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone">
+        <!-- 뒤로가기 버튼 -->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_cody_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:src="@drawable/arrow_left" />
 
+        <EditText
+            android:id="@+id/et_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="ID값이 들어갈 자리"/>
+        <EditText
+            android:id="@+id/et_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="category번호"/>
+        <EditText
+            android:id="@+id/et_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="name이 들어갈 자리"/>
+        <EditText
+            android:id="@+id/et_diameter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="diameter 가 들어갈 자리"/>
+        <EditText
+            android:id="@+id/et_Length"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="Length가 들어갈 자리"/>
+        <EditText
+            android:id="@+id/et_quantitiy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="quantitiy가 들어갈 자리"/>
+
+
+
+
+    </LinearLayout>
 </LinearLayout>

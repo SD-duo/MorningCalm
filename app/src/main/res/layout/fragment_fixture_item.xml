@@ -28,7 +28,7 @@
         app:layout_constraintStart_toEndOf="@id/iv_img">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_type"
+            android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="품목명"
