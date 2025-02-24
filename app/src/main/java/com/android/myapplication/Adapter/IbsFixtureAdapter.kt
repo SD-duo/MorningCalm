@@ -9,7 +9,9 @@ import com.android.myapplication.Data.Mc2
 import com.android.myapplication.R
 import com.android.myapplication.databinding.FragmentFixtureItemBinding
 
-class IbsFixtureAdapter : RecyclerView.Adapter<IbsFixtureAdapter.ViewHolder>() {
+class IbsFixtureAdapter(private val onItemClick: (Mc2.ResultData.Result) -> Unit) :
+    RecyclerView.Adapter<IbsFixtureAdapter.ViewHolder>() {
+
     private var items = mutableListOf<Mc2.ResultData.Result>()
 
     fun setItems(items: List<Mc2.ResultData.Result>) {
@@ -18,7 +20,6 @@ class IbsFixtureAdapter : RecyclerView.Adapter<IbsFixtureAdapter.ViewHolder>() {
         this.items.addAll(items.filter { it.category == "1" })
         notifyDataSetChanged()
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
@@ -30,23 +31,23 @@ class IbsFixtureAdapter : RecyclerView.Adapter<IbsFixtureAdapter.ViewHolder>() {
         holder.bindItems(items[position])
     }
 
-    override fun getItemCount(): Int {
-        return items.size
-    }
+    override fun getItemCount(): Int = items.size
 
-    inner class ViewHolder(val binding: FragmentFixtureItemBinding) :
+    inner class ViewHolder(private val binding: FragmentFixtureItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bindItems(item: Mc2.ResultData.Result) = binding.apply {
             ivImg.load(R.drawable.ibs)
-            tvSize.text =
-                item?.diameter.toString() + " ø " + " x " + item?.length.toString() + " mm "
-            tvQuantity.text = item?.code
-            tvType.text = item?.name
-            tvCode.text = item?.code
+            tvSize.text = "${item.diameter} ø x ${item.length} mm"
+            tvCode.text = item.code
+            tvName.text = item.name
             tvQuantity.text = item.quantity.toString()
+
+            root.setOnClickListener {
+
+                onItemClick(item) // 클릭된 아이템을 리스너로 전달
+                Log.d("ClickedView", "어뎁터에서 아이템 클릭됨: ${item.name}")
+            }
         }
     }
 }
-
-
