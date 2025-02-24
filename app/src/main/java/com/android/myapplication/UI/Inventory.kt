@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.myapplication.Adapter.IbsFixtureAdapter
 import com.android.myapplication.Adapter.OsstemFixtureAdapter
+import com.android.myapplication.Data.Mc2
 import com.android.myapplication.ViewModel.InventoryViewModel
 import com.android.myapplication.databinding.FragmentFixtureBinding
 import com.google.android.material.tabs.TabLayout
@@ -27,17 +28,15 @@ class Inventory : DialogFragment() {
     private var _binding: FragmentFixtureBinding? = null
     private val binding get() = _binding!!
 
-    private val osstemfixtureAdapter: OsstemFixtureAdapter by lazy { OsstemFixtureAdapter() }
-    private val ibsfixtureAdapter: IbsFixtureAdapter by lazy { IbsFixtureAdapter() }
+    private val osstemfixtureAdapter: OsstemFixtureAdapter by lazy {
+        OsstemFixtureAdapter{ selectedItem -> showItemDetails(selectedItem)} }
 
+    // 이미 클릭 리스너를 생성자에서 설정했으므로 추가 설정이 필요 없음
+    private val ibsfixtureAdapter: IbsFixtureAdapter by lazy {
+        IbsFixtureAdapter { selectedItem -> showItemDetails(selectedItem) }
+    }
 
     private val viewModel: InventoryViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,15 +48,19 @@ class Inventory : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.imgCodyBack.setOnClickListener {
+            binding.Allview.visibility = View.VISIBLE
+                binding.viewCliked.visibility = View.GONE
+
+        }
+
         binding.apply {
             bgCody.setOnClickListener {
                 viewModel.getMcData()
             }
         }
 
-
-        // binding 초기화 후 사용
-        _binding?.let { binding ->  // binding이 null이 아닌 경우에만 실행
+        _binding?.let { binding ->
             initView()
             initViewModel()
 
@@ -65,7 +68,6 @@ class Inventory : DialogFragment() {
             tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     tab?.let {
-                        // binding이 null이 아닐 때만 실행
                         binding.apply {
                             when (it.position) {
                                 0 -> rvMaterial.adapter = ibsfixtureAdapter
@@ -81,43 +83,33 @@ class Inventory : DialogFragment() {
         } ?: Log.e("InventoryFragment", "Binding is null during onViewCreated!")
     }
 
-
-
-    override fun onResume() {
-        super.onResume()
-        dialog?.window?.setLayout(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.MATCH_PARENT
-        )
-        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.WHITE))
-        dialog?.window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-
-    }
-
     private fun initView() {
-        binding.imgCodyBack.setOnClickListener {
-            dismiss()
-        }
-        // RV 어댑터를 기본으로 설정 (이 시점에서 binding은 이미 초기화됨)
+
         binding.rvMaterial.adapter = ibsfixtureAdapter
         binding.rvMaterial.layoutManager = LinearLayoutManager(context)
     }
 
     private fun initViewModel() = binding.apply {
-
-
-        // ViewModel의 데이터 변화 감지 후 어댑터에 업데이트
         viewModel.items.observe(viewLifecycleOwner) { newList ->
-            Log.d("InventoryFragment", "Observer triggered! New list size: ${newList.size}") // 확인용 로그 추가
+            Log.d("InventoryFragment", "Observer triggered! New list size: ${newList.size}")
             ibsfixtureAdapter.setItems(newList)
             osstemfixtureAdapter.setItems(newList)
         }
-        // API 호출 (최초 한 번만 호출)
         viewModel.getMcData()
+    }
+
+    private fun showItemDetails(item: Mc2.ResultData.Result) {
+        _binding?.apply {
+            Allview.visibility = View.GONE
+            viewCliked.visibility = View.VISIBLE
+
+            etId.setText(item.id.toString())
+            etCategory.setText(item.category.toString())
+            etDiameter.setText(item.diameter.toString())
+            etName.setText(item.name)
+            etLength.setText(item.length.toString())
+            etQuantitiy.setText(item.quantity.toString())
+
+        } ?: Log.e("ClickedView", "리스트가 클릭되었습니다")
     }
 }

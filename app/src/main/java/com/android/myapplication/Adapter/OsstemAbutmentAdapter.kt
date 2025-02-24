@@ -42,7 +42,7 @@ class OsstemAbutmentAdapter() : RecyclerView.Adapter<OsstemAbutmentAdapter.ViewH
             ivImg.load(R.drawable.fixture_ts)
             tvSize.text = item?.diameter.toString() + " ø " + " x " + item?.length.toString() + " mm "
             tvQuantity.text = item?.code
-            tvType.text = item?.name
+            tvName.text = item?.name
         }
     }
 
