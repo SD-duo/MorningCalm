@@ -41,7 +41,7 @@ class IbsAbutmentAdapter : RecyclerView.Adapter<IbsAbutmentAdapter.ViewHolder>()
             ivImg.load(R.drawable.ibs)
             tvSize.text = "${item.diameter} ø x ${item.length} mm"
             tvQuantity.text = item.code
-            tvType.text = item.name
+            tvName.text = item.name
         }
     }
 }
