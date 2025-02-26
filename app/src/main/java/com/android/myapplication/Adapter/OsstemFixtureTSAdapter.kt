@@ -8,8 +8,8 @@ import com.android.myapplication.Data.Mc2
 import com.android.myapplication.R
 import com.android.myapplication.databinding.FragmentFixtureItemBinding
 
-class OsstemFixtureAdapter(private val onItemClick: (Mc2.ResultData.Result) -> Unit) :
-    RecyclerView.Adapter<OsstemFixtureAdapter.ViewHolder>() {
+class OsstemFixtureTSAdapter(private val onItemClick: (Mc2.ResultData.Result) -> Unit) :
+    RecyclerView.Adapter<OsstemFixtureTSAdapter.ViewHolder>() {
 
     private var items = mutableListOf<Mc2.ResultData.Result>()
 
@@ -22,7 +22,7 @@ class OsstemFixtureAdapter(private val onItemClick: (Mc2.ResultData.Result) -> U
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): OsstemFixtureAdapter.ViewHolder {
+    ): OsstemFixtureTSAdapter.ViewHolder {
 
         val binding =
             FragmentFixtureItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -30,7 +30,7 @@ class OsstemFixtureAdapter(private val onItemClick: (Mc2.ResultData.Result) -> U
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: OsstemFixtureAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: OsstemFixtureTSAdapter.ViewHolder, position: Int) {
         holder.bindItems(items[position])
     }
 
@@ -43,13 +43,8 @@ class OsstemFixtureAdapter(private val onItemClick: (Mc2.ResultData.Result) -> U
 
         fun bindItems(item: Mc2.ResultData.Result) = binding.apply {
 
-            when (item.type) {
-                "ts" -> ivImg.load(R.drawable.fixture_ts)
-                "ss" -> ivImg.load(R.drawable.fixture_ss)
-                else -> ivImg.load(R.drawable.save)
 
-            }
-
+            ivImg.load(R.drawable.fixture_ts)
             tvSize.text =
                 item?.diameter.toString() + " ø " + " x " + item?.length.toString() + " mm "
             tvQuantity.text = item?.code

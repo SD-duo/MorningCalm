@@ -46,7 +46,7 @@ class IbsFixtureAdapter(private val onItemClick: (Mc2.ResultData.Result) -> Unit
             root.setOnClickListener {
 
                 onItemClick(item) // 클릭된 아이템을 리스너로 전달
-                Log.d("ClickedView", "어뎁터에서 아이템 클릭됨: ${item.name}")
+                Log.d("ClickedView", "IbsFixture 어뎁터에서 아이템 클릭됨: ${item.name}")
             }
         }
     }

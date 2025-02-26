@@ -1,18 +1,17 @@
 package com.android.myapplication.UI
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.myapplication.Adapter.IbsAbutmentAdapter
 import com.android.myapplication.Adapter.IbsFixtureAdapter
-import com.android.myapplication.Adapter.OsstemFixtureAdapter
+import com.android.myapplication.Adapter.OsstemAbutmentAdapter
+import com.android.myapplication.Adapter.OsstemFixtureTSAdapter
 import com.android.myapplication.Data.Mc2
 import com.android.myapplication.ViewModel.InventoryViewModel
 import com.android.myapplication.databinding.FragmentFixtureBinding
@@ -28,13 +27,21 @@ class Inventory : DialogFragment() {
     private var _binding: FragmentFixtureBinding? = null
     private val binding get() = _binding!!
 
-    private val osstemfixtureAdapter: OsstemFixtureAdapter by lazy {
-        OsstemFixtureAdapter{ selectedItem -> showItemDetails(selectedItem)} }
+    private val osstemfixturetsAdapter: OsstemFixtureTSAdapter by lazy {
+        OsstemFixtureTSAdapter{ selectedItem -> showItemDetails(selectedItem)} }
 
-    // 이미 클릭 리스너를 생성자에서 설정했으므로 추가 설정이 필요 없음
+    private val osstemfixturessAdapter: OsstemFixtureTSAdapter by lazy {
+        OsstemFixtureTSAdapter{ selectedItem -> showItemDetails(selectedItem)} }
+
     private val ibsfixtureAdapter: IbsFixtureAdapter by lazy {
         IbsFixtureAdapter { selectedItem -> showItemDetails(selectedItem) }
     }
+    private val osstemabutmentAdapter: OsstemAbutmentAdapter by lazy {
+        OsstemAbutmentAdapter{ selectedItem -> showItemDetails(selectedItem)} }
+
+    private val ibsabutmentAdapter: IbsAbutmentAdapter by lazy {
+        IbsAbutmentAdapter{ selectedItem -> showItemDetails(selectedItem)} }
+
 
     private val viewModel: InventoryViewModel by viewModels()
 
@@ -48,6 +55,14 @@ class Inventory : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //추가버튼
+        binding.btnAdd.setOnClickListener {
+            binding.Allview.visibility = View.GONE
+            binding.viewCliked.visibility = View.VISIBLE
+        }
+
+
+        //뒤로가기 버튼
         binding.imgCodyBack.setOnClickListener {
             binding.Allview.visibility = View.VISIBLE
                 binding.viewCliked.visibility = View.GONE
@@ -71,7 +86,11 @@ class Inventory : DialogFragment() {
                         binding.apply {
                             when (it.position) {
                                 0 -> rvMaterial.adapter = ibsfixtureAdapter
-                                2 -> rvMaterial.adapter = osstemfixtureAdapter
+                                1 -> rvMaterial.adapter = ibsabutmentAdapter
+                                2 -> rvMaterial.adapter = osstemfixturetsAdapter
+                                3 -> rvMaterial.adapter = osstemfixturessAdapter
+                                4 -> rvMaterial.adapter = osstemabutmentAdapter
+
                             }
                         }
                     } ?: Log.e("InventoryFragment", "Binding is null!")
@@ -93,7 +112,7 @@ class Inventory : DialogFragment() {
         viewModel.items.observe(viewLifecycleOwner) { newList ->
             Log.d("InventoryFragment", "Observer triggered! New list size: ${newList.size}")
             ibsfixtureAdapter.setItems(newList)
-            osstemfixtureAdapter.setItems(newList)
+            osstemfixturetsAdapter.setItems(newList)
         }
         viewModel.getMcData()
     }
