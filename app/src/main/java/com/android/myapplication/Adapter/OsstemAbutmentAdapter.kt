@@ -15,6 +15,7 @@ class OsstemAbutmentAdapter(private val onItemClick: (Mc2.ResultData.Result) -> 
     private var items = mutableListOf<Mc2.ResultData.Result>()
 
     fun setItems(items: List<Mc2.ResultData.Result>) {
+        Log.d("어버트먼트", "Adapter updated, new size: ${items.size}")
         this.items.clear()
         this.items.addAll(items.filter { it.category == "5" })
         notifyDataSetChanged()
@@ -49,9 +50,11 @@ class OsstemAbutmentAdapter(private val onItemClick: (Mc2.ResultData.Result) -> 
                 item?.diameter.toString() + " ø " + " x " + item?.length.toString() + " mm "
             tvQuantity.text = item?.code
             tvName.text = item?.name
+            root.setOnClickListener {
+                onItemClick(item) // 클릭된 아이템을 리스너로 전달
+                Log.d("ClickedView", "오스템 어버트먼트 어뎁터에서 아이템 클릭됨: ${item.name}")
 
-            onItemClick(item) // 클릭된 아이템을 리스너로 전달
-            Log.d("ClickedView", "오스템 어버트먼트 어뎁터에서 아이템 클릭됨: ${item.name}")
+            }
         }
     }
 }
