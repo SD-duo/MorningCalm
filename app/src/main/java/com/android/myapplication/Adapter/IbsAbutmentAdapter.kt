@@ -10,23 +10,30 @@ import com.android.myapplication.Data.Mc2
 import com.android.myapplication.R
 import com.android.myapplication.databinding.FragmentFixtureItemBinding
 
-class IbsAbutmentAdapter : RecyclerView.Adapter<IbsAbutmentAdapter.ViewHolder>() {
+class IbsAbutmentAdapter(private val onItemClick: (Mc2.ResultData.Result) -> Unit) :
+    RecyclerView.Adapter<IbsAbutmentAdapter.ViewHolder>() {
+
     private var items = mutableListOf<Mc2.ResultData.Result>()
 
     fun setItems(items: List<Mc2.ResultData.Result>) {
+        Log.d("setItems", "IbsAbt 의 Adapter updated, new size: ${items.size}")
         this.items.clear()
-        this.items.addAll(items.filter { it.category == "3" })
+        this.items.addAll(items.filter { it.category == "5" })
         notifyDataSetChanged()
     }
 
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): IbsAbutmentAdapter.ViewHolder {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
             FragmentFixtureItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: IbsAbutmentAdapter.ViewHolder, position: Int) {
         holder.bindItems(items[position])
     }
 
@@ -38,10 +45,16 @@ class IbsAbutmentAdapter : RecyclerView.Adapter<IbsAbutmentAdapter.ViewHolder>()
         RecyclerView.ViewHolder(binding.root) {
 
         fun bindItems(item: Mc2.ResultData.Result) = binding.apply {
-            ivImg.load(R.drawable.ibs)
-            tvSize.text = "${item.diameter} ø x ${item.length} mm"
-            tvQuantity.text = item.code
-            tvName.text = item.name
+
+            ivImg.load(R.drawable.teeth2)
+            tvSize.text =
+                item?.diameter.toString() + " ø " + " x " + item?.length.toString() + " mm "
+            tvQuantity.text = item?.code
+            tvName.text = item?.name
+            root.setOnClickListener {
+                onItemClick(item) // 클릭된 아이템을 리스너로 전달
+                Log.d("ClickedView", "IBS 어버트먼트 어뎁터에서 아이템 클릭됨: ${item.name}")
+            }
         }
     }
 }

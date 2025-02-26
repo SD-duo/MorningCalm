@@ -16,22 +16,20 @@ data class Mc2(
         val result: List<Result?>?
     ) {
         data class Result(
+            @SerializedName("id")
+            val id: Int?,
             @SerializedName("category")
             val category: String?,
             @SerializedName("code")
             val code: String?,
             @SerializedName("diameter")
             val diameter: Double?,
-            @SerializedName("id")
-            val id: Int?,
             @SerializedName("length")
             val length: Double?,
             @SerializedName("name")
             val name: String?,
             @SerializedName("quantity")
             val quantity: Int?,
-            @SerializedName("type")
-            val type: String?
         )
     }
 }

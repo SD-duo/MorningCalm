@@ -5,12 +5,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.android.myapplication.Data.Mc2
+import com.android.myapplication.Data.RequestMc
 import com.android.myapplication.Service.RetrofitModule
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class InventoryViewModel : ViewModel() {
+
     private val _items = MutableLiveData<List<Mc2.ResultData.Result>>()
     val items: LiveData<List<Mc2.ResultData.Result>> get() = _items
 
@@ -18,8 +20,9 @@ class InventoryViewModel : ViewModel() {
 
     fun setAllItems(items: List<Mc2.ResultData.Result>) {
         allItems = items
-        _items.value = items
+        _items.postValue(items.toList()) // 🚀 postValue() 사용
     }
+
 
     fun getMcData() {
         val service = RetrofitModule.createSonnyApiService()
@@ -29,30 +32,41 @@ class InventoryViewModel : ViewModel() {
             override fun onResponse(call: Call<Mc2>, response: Response<Mc2>) {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
-                    val resultList = responseBody?.resultData?.result?.filterNotNull() ?: emptyList()  // ✅ null 제거
+                    val resultList =
+                        responseBody?.resultData?.result?.filterNotNull() ?: emptyList()
 
                     setAllItems(resultList)
-                    _items.value = resultList  // 🔥 LiveData 업데이트 추가
-
-                    Log.d("InventoryViewModel", "API Response: ${resultList.size} items")
+//                    Log.d("InventoryViewModel", "API Response: ${responseBody?.resultData?.result} items")
                 }
             }
 
             override fun onFailure(call: Call<Mc2>, t: Throwable) {
                 Log.e("InventoryViewModel", "API call failed", t)
-
             }
         })
     }
 
+    fun postMcData(updatedItem: RequestMc) {
+        val service = RetrofitModule.createSonnyApiService()
+        val call: Call<Void> = service.updateMcdata(updatedItem)
 
-    //1.추가 삭제 버튼
-    //2.수정 버튼      [ 수정할때 나올 UI ] -> 수정버튼 누르면 해당 리스트에 해당하는 데이터도 같이 팝업 되야함(Edittext로 수정,입력 가능하게)
+        call.enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    Log.d("InventoryViewModel", "Item updated successfully!")
+                    // 데이터를 다시 불러와서 LiveData에 업데이트
+                    getMcData()
 
-    //보낼때
-    fun postMcData(update: List<Mc2.ResultData.Result>){
-        update //
+                } else {
+                    Log.e("InventoryViewModel", "Update failed: ${response.errorBody()?.string()}")
+                }
+            }
 
-
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Log.e("InventoryViewModel", "API call failed", t)
+            }
+        })
     }
 }
+//변경1
+

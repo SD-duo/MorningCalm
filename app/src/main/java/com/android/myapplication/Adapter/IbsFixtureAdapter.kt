@@ -15,7 +15,7 @@ class IbsFixtureAdapter(private val onItemClick: (Mc2.ResultData.Result) -> Unit
     private var items = mutableListOf<Mc2.ResultData.Result>()
 
     fun setItems(items: List<Mc2.ResultData.Result>) {
-        Log.d("IbsFixtureAdapter", "Adapter updated, new size: ${items.size}")
+        Log.d("setItems", "Ibs Fixture 의 Adapter updated, new size: ${items.size}")
         this.items.clear()
         this.items.addAll(items.filter { it.category == "1" })
         notifyDataSetChanged()
@@ -46,7 +46,7 @@ class IbsFixtureAdapter(private val onItemClick: (Mc2.ResultData.Result) -> Unit
             root.setOnClickListener {
 
                 onItemClick(item) // 클릭된 아이템을 리스너로 전달
-                Log.d("ClickedView", "어뎁터에서 아이템 클릭됨: ${item.name}")
+                Log.d("ClickedView", "IbsFixture 어뎁터에서 아이템 클릭됨: ${item.name}")
             }
         }
     }

@@ -13,6 +13,14 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/white">
+    <!--    추가버튼    -->
+        <Button
+            android:id="@+id/btn_Add"
+            android:layout_gravity="right"
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"/>
 
 
     <!-- 상단 배경 이미지 -->
@@ -42,15 +50,19 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="IBS&#10; [Abutment]"/>
+                android:text="IBS&#10; [Abt]"/>
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Osstem &#10;[Fixture]"/>
+                android:text="오스템Ts&#10;[Fixture]"/>
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Osstem &#10; [Abutment]"/>
+                android:text="오스템Ss&#10;[Fixture]"/>
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Osstem &#10; [Abt]"/>
 
         </com.google.android.material.tabs.TabLayout>
 
@@ -64,6 +76,8 @@
         android:background="#EDEDED"
         tools:listitem="@layout/fragment_fixture_item" />
     </LinearLayout>
+
+<!--    리스트가 클릭되었을때 나타나는 뷰-->
     <LinearLayout
         android:id="@+id/view_Cliked"
         android:layout_width="match_parent"
@@ -71,6 +85,12 @@
         android:orientation="vertical"
         android:gravity="center"
         android:visibility="gone">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/btn_save"
+            android:layout_marginLeft="120dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/teeth3"/>
         <!-- 뒤로가기 버튼 -->
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_cody_back"
@@ -91,6 +111,12 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:hint="category번호"/>
+        <EditText
+            android:id="@+id/et_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="code가 들어갈 자리"/>
         <EditText
             android:id="@+id/et_name"
             android:layout_width="wrap_content"
