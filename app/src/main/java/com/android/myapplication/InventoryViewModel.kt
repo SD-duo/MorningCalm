@@ -19,11 +19,10 @@ class InventoryViewModel : ViewModel() {
     private var allItems: List<Mc2.ResultData.Result> = emptyList()
 
     fun setAllItems(items: List<Mc2.ResultData.Result>) {
-        Log.d("setItems","InventoryViewModel의 setAllItems가 불림")
-
         allItems = items
-        _items.value = items.toList()
+        _items.postValue(items.toList()) // 🚀 postValue() 사용
     }
+
 
     fun getMcData() {
         val service = RetrofitModule.createSonnyApiService()
@@ -33,10 +32,11 @@ class InventoryViewModel : ViewModel() {
             override fun onResponse(call: Call<Mc2>, response: Response<Mc2>) {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
-                    val resultList = responseBody?.resultData?.result?.filterNotNull() ?: emptyList()
+                    val resultList =
+                        responseBody?.resultData?.result?.filterNotNull() ?: emptyList()
 
                     setAllItems(resultList)
-                    Log.d("InventoryViewModel", "API Response: ${resultList.size} items")
+//                    Log.d("InventoryViewModel", "API Response: ${responseBody?.resultData?.result} items")
                 }
             }
 

@@ -15,7 +15,7 @@ class OsstemAbutmentAdapter(private val onItemClick: (Mc2.ResultData.Result) -> 
     private var items = mutableListOf<Mc2.ResultData.Result>()
 
     fun setItems(items: List<Mc2.ResultData.Result>) {
-        Log.d("어버트먼트", "Adapter updated, new size: ${items.size}")
+        Log.d("setItems", "Adapter updated, new size: ${items.size}")
         this.items.clear()
         this.items.addAll(items.filter { it.category == "5" })
         notifyDataSetChanged()
