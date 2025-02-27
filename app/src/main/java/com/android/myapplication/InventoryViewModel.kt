@@ -27,7 +27,7 @@ class InventoryViewModel : ViewModel() {
     fun getMcData() {
         val service = RetrofitModule.createSonnyApiService()
         val call: Call<Mc2> = service.getMcdata()
-
+//        Log.e("getMcData", ">>>>>>>>>>getMcData() 호출!!")
         call.enqueue(object : Callback<Mc2> {
             override fun onResponse(call: Call<Mc2>, response: Response<Mc2>) {
                 if (response.isSuccessful) {

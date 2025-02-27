@@ -135,6 +135,7 @@ class Inventory : DialogFragment() {
     }
 
     private fun initViewModel() = binding.apply {
+            viewModel.getMcData() // 데이터 초기 불러오기
             Log.d("InventoryFragment", "Observing LiveData")
         viewModel.items.observe(viewLifecycleOwner) { newList ->
             Log.d("InventoryFragment", "Observer triggered! New list size: ${newList.size}")
@@ -144,7 +145,6 @@ class Inventory : DialogFragment() {
             osstemfixturessAdapter.setItems(newList)
             osstemabutmentAdapter.setItems(newList)
         }
-        viewModel.getMcData() // 데이터 초기 불러오기
     }
 
     private fun showItemDetails(item: Mc2.ResultData.Result) {
