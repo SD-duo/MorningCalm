@@ -12,7 +12,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class InventoryViewModel : ViewModel() {
-
+    //commit test
     private val _items = MutableLiveData<List<Mc2.ResultData.Result>>()
     val items: LiveData<List<Mc2.ResultData.Result>> get() = _items
 
