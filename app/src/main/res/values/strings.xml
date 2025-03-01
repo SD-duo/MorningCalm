@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">모닝캄치과(수가표)</string>
+    <string name="app_name">모닝캄치과</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="one" translatable="false">견적내기</string>
