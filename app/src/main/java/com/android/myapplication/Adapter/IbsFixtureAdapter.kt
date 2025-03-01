@@ -1,12 +1,10 @@
 package com.android.myapplication.Adapter
 
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.android.myapplication.Data.Mc
 import com.android.myapplication.Data.Mc2
 import com.android.myapplication.R
 import com.android.myapplication.databinding.FragmentFixtureItemBinding
@@ -47,7 +45,7 @@ class IbsFixtureAdapter(
             tvSize.text = "${item.diameter} ø x ${item.length} mm"
             tvCode.text = item.code
             tvName.text = item.name
-            tvQuantity.text = item.quantity.toString()
+            tvQuantity.text = "재고 : " + item.quantity.toString()
 
             root.setOnClickListener {
 

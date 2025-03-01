@@ -1,8 +1,7 @@
 package com.android.myapplication.Data
 
 
-data class RequestMc(
-
+data class UpdateMc(
     val id: Int?,
     val category: String?,
     val code: String?,

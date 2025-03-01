@@ -23,17 +23,19 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="90dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/iv_img">
+        app:layout_constraintStart_toEndOf="@id/iv_img"
+        tools:layout_editor_absoluteY="8dp">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="품목명"
-            android:textStyle="bold"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_size"
@@ -49,16 +51,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Code"
-            android:textStyle="bold"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="수량"
-            android:textStyle="bold"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
 
     </LinearLayout>
@@ -72,11 +74,22 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <TextView
+        <Button
             android:id="@+id/tv_temporary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="임시"/>
+            android:layout_width="67dp"
+            android:layout_height="35dp"
+            android:layout_marginBottom="8dp"
+            android:textStyle="bold"
+            android:textSize="10sp"
+            android:text="사용"
+            android:backgroundTint="@color/Green"/>
+        <Button
+            android:layout_width="67dp"
+            android:layout_height="35dp"
+            android:textStyle="bold"
+            android:textSize="10sp"
+            android:text="삭제"
+            android:backgroundTint="@color/DeleteRed"/>
     </LinearLayout>
 >
 
