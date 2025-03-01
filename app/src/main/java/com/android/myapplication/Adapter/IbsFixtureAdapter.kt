@@ -1,24 +1,30 @@
 package com.android.myapplication.Adapter
 
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.android.myapplication.Data.Mc
 import com.android.myapplication.Data.Mc2
 import com.android.myapplication.R
 import com.android.myapplication.databinding.FragmentFixtureItemBinding
 
-class IbsFixtureAdapter(private val onItemClick: (Mc2.ResultData.Result) -> Unit) :
+class IbsFixtureAdapter(
+    private val onItemClick: (Mc2.ResultData.Result) -> Unit?,
+    val items:  MutableList<Mc2.ResultData.Result>
+) :
     RecyclerView.Adapter<IbsFixtureAdapter.ViewHolder>() {
 
-    private var items = mutableListOf<Mc2.ResultData.Result>()
 
     fun setItems(items: List<Mc2.ResultData.Result>) {
         Log.d("setItems", "Ibs Fixture 의 Adapter updated, new size: ${items.size}")
+
         this.items.clear()
         this.items.addAll(items.filter { it.category == "1" })
         notifyDataSetChanged()
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

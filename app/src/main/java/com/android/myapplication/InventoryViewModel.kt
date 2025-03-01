@@ -14,20 +14,14 @@ import retrofit2.Response
 class InventoryViewModel : ViewModel() {
     //commit test
     private val _items = MutableLiveData<List<Mc2.ResultData.Result>>()
-    val items: LiveData<List<Mc2.ResultData.Result>> get() = _items
-
-    private var allItems: List<Mc2.ResultData.Result> = emptyList()
-
-    fun setAllItems(items: List<Mc2.ResultData.Result>) {
-        allItems = items
-        _items.postValue(items.toList()) // 🚀 postValue() 사용
-    }
+    val items: LiveData<List<Mc2.ResultData.Result>>
+        get() = _items
 
 
     fun getMcData() {
         val service = RetrofitModule.createSonnyApiService()
         val call: Call<Mc2> = service.getMcdata()
-//        Log.e("getMcData", ">>>>>>>>>>getMcData() 호출!!")
+
         call.enqueue(object : Callback<Mc2> {
             override fun onResponse(call: Call<Mc2>, response: Response<Mc2>) {
                 if (response.isSuccessful) {
@@ -35,8 +29,9 @@ class InventoryViewModel : ViewModel() {
                     val resultList =
                         responseBody?.resultData?.result?.filterNotNull() ?: emptyList()
 
-                    setAllItems(resultList)
-//                    Log.d("InventoryViewModel", "API Response: ${responseBody?.resultData?.result} items")
+                    _items.value = resultList!!
+                    Log.d("InventoryViewModel", "getMcData()가 호출됨")
+
                 }
             }
 
@@ -54,6 +49,7 @@ class InventoryViewModel : ViewModel() {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (response.isSuccessful) {
                     Log.d("InventoryViewModel", "Item updated successfully!")
+
                     // 데이터를 다시 불러와서 LiveData에 업데이트
                     getMcData()
 
@@ -68,5 +64,4 @@ class InventoryViewModel : ViewModel() {
         })
     }
 }
-//변경1
 

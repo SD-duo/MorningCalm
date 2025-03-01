@@ -9,7 +9,9 @@ import com.android.myapplication.Data.Mc2
 import com.android.myapplication.R
 import com.android.myapplication.databinding.FragmentFixtureItemBinding
 
-class OsstemAbutmentAdapter(private val onItemClick: (Mc2.ResultData.Result) -> Unit) :
+class OsstemAbutmentAdapter(
+    private val onItemClick: (Mc2.ResultData.Result) -> Unit
+) :
     RecyclerView.Adapter<OsstemAbutmentAdapter.ViewHolder>() {
 
     private var items = mutableListOf<Mc2.ResultData.Result>()
