@@ -6,11 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.myapplication.Adapter.IbsAbutmentAdapter
 import com.android.myapplication.Adapter.IbsFixtureAdapter
@@ -18,7 +15,7 @@ import com.android.myapplication.Adapter.OsstemAbutmentAdapter
 import com.android.myapplication.Adapter.OsstemFixtureSSAdapter
 import com.android.myapplication.Adapter.OsstemFixtureTSAdapter
 import com.android.myapplication.Data.Mc2
-import com.android.myapplication.Data.RequestMc
+import com.android.myapplication.Data.UpdateMc
 import com.android.myapplication.ViewModel.InventoryViewModel
 import com.android.myapplication.databinding.FragmentFixtureBinding
 import com.google.android.material.tabs.TabLayout
@@ -75,10 +72,11 @@ class Inventory : Fragment() {
 
 
         initView()
+        initViewModel()
 
 
         binding.btnSave.setOnClickListener {
-            val updatedItem = RequestMc(
+            val updatedItem = UpdateMc(
                 id = binding.etId.text.toString().toIntOrNull(),
                 category = binding.etCategory.text.toString(),
                 code = binding.etCode.text.toString(),
@@ -97,8 +95,9 @@ class Inventory : Fragment() {
             binding.Allview.visibility = View.VISIBLE
             binding.viewCliked.visibility = View.GONE
 
-
         }
+
+        //삭제버튼 만들기
 
         binding.btnAdd.setOnClickListener {
             binding.Allview.visibility = View.GONE
@@ -112,7 +111,6 @@ class Inventory : Fragment() {
 
         binding.apply {
             bgCody.setOnClickListener {
-                initViewModel()
                 apiRequest()
             }
         }
@@ -180,6 +178,7 @@ class Inventory : Fragment() {
             osstemabutmentAdapter.setItems(newList)
 
         }
+        apiRequest()
     }
 
 

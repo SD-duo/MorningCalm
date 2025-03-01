@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.android.myapplication.Data.Mc
 import com.android.myapplication.Data.Mc2
 import com.android.myapplication.R
 import com.android.myapplication.databinding.FragmentFixtureItemBinding
@@ -47,13 +46,13 @@ class IbsAbutmentAdapter(private val onItemClick: (Mc2.ResultData.Result) -> Uni
         fun bindItems(item: Mc2.ResultData.Result) = binding.apply {
 
             ivImg.load(R.drawable.teeth2)
+            tvName.text = item?.name
             tvSize.text =
                 item?.diameter.toString() + " ø " + " x " + item?.length.toString() + " mm "
-            tvQuantity.text = item?.code
-            tvName.text = item?.name
+            tvCode.text = item?.code
+            tvQuantity.text = "재고 : " + item.quantity.toString()
             root.setOnClickListener {
                 onItemClick(item) // 클릭된 아이템을 리스너로 전달
-                Log.d("ClickedView", "IBS 어버트먼트 어뎁터에서 아이템 클릭됨: ${item.name}")
             }
         }
     }

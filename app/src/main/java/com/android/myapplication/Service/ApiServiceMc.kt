@@ -1,13 +1,12 @@
 package com.android.myapplication.Service
 
-import com.android.myapplication.Data.Mc
+import com.android.myapplication.Data.DeleteMc
 import com.android.myapplication.Data.Mc2
-import com.android.myapplication.Data.RequestMc
-import com.google.gson.annotations.SerializedName
+import com.android.myapplication.Data.UpdateMc
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
-import retrofit2.http.POST
 import retrofit2.http.PUT
 
 interface ApiServiceMc {
@@ -18,8 +17,13 @@ interface ApiServiceMc {
 
     @PUT("material/updateProperty")
     fun updateMcdata(
-        @Body requestMc: RequestMc
+        @Body requestMc: UpdateMc
 
+    ): Call<Void>
+
+    @DELETE("material/deleteProperty")
+    fun deleteMcdata(
+        @Body deleteMc: DeleteMc
     ): Call<Void>
 
 }

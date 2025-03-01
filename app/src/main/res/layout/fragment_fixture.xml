@@ -14,13 +14,14 @@
         android:orientation="vertical"
         android:background="@color/white">
     <!--    추가버튼    -->
-        <Button
+        <ImageView
             android:id="@+id/btn_Add"
             android:layout_gravity="right"
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+"/>
+            android:layout_margin="20dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/add_circle"
+            android:backgroundTint="@color/AddGray"/>
 
 
     <!-- 상단 배경 이미지 -->
@@ -82,15 +83,17 @@
         android:id="@+id/view_Cliked"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="300dp"
         android:orientation="vertical"
         android:gravity="center"
-        android:visibility="gone">
+        android:visibility="gone"
+        android:background="@drawable/round_border">
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/btn_save"
             android:layout_marginLeft="120dp"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@drawable/teeth3"/>
+            android:background="@drawable/save"/>
         <!-- 뒤로가기 버튼 -->
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_cody_back"
@@ -101,46 +104,67 @@
 
         <EditText
             android:id="@+id/et_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
             android:gravity="center"
-            android:hint="ID값이 들어갈 자리"/>
+            android:hint="ID값이 들어갈 자리"
+            android:background="@android:drawable/editbox_background"
+            android:padding="10dp"
+            android:layout_marginTop="12dp"/>
         <EditText
             android:id="@+id/et_category"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
             android:gravity="center"
-            android:hint="category번호"/>
+            android:hint="category번호"
+            android:background="@android:drawable/editbox_background"
+            android:padding="10dp"
+            android:layout_marginTop="12dp" />
         <EditText
             android:id="@+id/et_code"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
             android:gravity="center"
-            android:hint="code가 들어갈 자리"/>
+            android:hint="code가 들어갈 자리"
+            android:background="@android:drawable/editbox_background"
+            android:padding="10dp"
+            android:layout_marginTop="12dp"/>
         <EditText
             android:id="@+id/et_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
             android:gravity="center"
-            android:hint="name이 들어갈 자리"/>
+            android:hint="name이 들어갈 자리"
+            android:background="@android:drawable/editbox_background"
+            android:padding="10dp"
+            android:layout_marginTop="12dp"/>
         <EditText
             android:id="@+id/et_diameter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
             android:gravity="center"
-            android:hint="diameter 가 들어갈 자리"/>
+            android:hint="diameter 가 들어갈 자리"
+            android:background="@android:drawable/editbox_background"
+            android:padding="10dp"
+            android:layout_marginTop="12dp"/>
         <EditText
             android:id="@+id/et_Length"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
             android:gravity="center"
-            android:hint="Length가 들어갈 자리"/>
+            android:hint="Length가 들어갈 자리"
+            android:background="@android:drawable/editbox_background"
+            android:padding="10dp"
+            android:layout_marginTop="12dp"/>
         <EditText
             android:id="@+id/et_quantitiy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
             android:gravity="center"
-            android:hint="quantitiy가 들어갈 자리"/>
+            android:hint="quantitiy가 들어갈 자리"
+            android:background="@android:drawable/editbox_background"
+            android:padding="10dp"
+            android:layout_marginTop="12dp"/>
 
 
 
