@@ -5,7 +5,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
@@ -22,8 +24,7 @@ import com.android.myapplication.databinding.FragmentFixtureBinding
 import com.google.android.material.tabs.TabLayout
 
 
-
-class Inventory : DialogFragment() {
+class Inventory : Fragment() {
     companion object {
         fun newinstance(): Inventory = Inventory()
     }
@@ -39,9 +40,12 @@ class Inventory : DialogFragment() {
         OsstemFixtureSSAdapter { selectedItem -> showItemDetails(selectedItem) }
     }
 
-    private val ibsfixtureAdapter: IbsFixtureAdapter by lazy {
-        IbsFixtureAdapter { selectedItem -> showItemDetails(selectedItem) }
+
+    private val dataList1 = mutableListOf<Mc2.ResultData.Result>()
+    private val ibsfixtureAdapter by lazy {
+        IbsFixtureAdapter({ selectedItem -> showItemDetails(selectedItem) }, dataList1)
     }
+
 
     private val osstemabutmentAdapter: OsstemAbutmentAdapter by lazy {
         OsstemAbutmentAdapter { selectedItem -> showItemDetails(selectedItem) }
@@ -53,6 +57,11 @@ class Inventory : DialogFragment() {
 
     private val viewModel: InventoryViewModel by viewModels()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        //asdf
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -63,6 +72,10 @@ class Inventory : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+        initView()
+
 
         binding.btnSave.setOnClickListener {
             val updatedItem = RequestMc(
@@ -76,13 +89,15 @@ class Inventory : DialogFragment() {
             )
 
             if (updatedItem.id != null) {
-                viewModel.postMcData(updatedItem) // 🚀 서버에 업데이트 요청
-            } else {
+                viewModel.postMcData(updatedItem)
+            } // 🚀 서버에 업데이트 요청
+            else {
                 Log.e("Inventory", "Invalid item ID")
             }
-
             binding.Allview.visibility = View.VISIBLE
             binding.viewCliked.visibility = View.GONE
+
+
         }
 
         binding.btnAdd.setOnClickListener {
@@ -91,42 +106,61 @@ class Inventory : DialogFragment() {
         }
 
         binding.imgCodyBack.setOnClickListener {
-            binding.Allview.visibility = View.VISIBLE
-            binding.viewCliked.visibility = View.GONE
+            binding.Allview.isVisible = true
+            binding.viewCliked.isVisible = false
         }
 
         binding.apply {
-            bgCody.setOnClickListener {}
+            bgCody.setOnClickListener {
+                initViewModel()
+                apiRequest()
+            }
         }
 
-        _binding?.let { binding ->
-            initView()
-            viewLifecycleOwner.lifecycle.addObserver(object : DefaultLifecycleObserver {
-                override fun onCreate(owner: LifecycleOwner) {
-                    initViewModel()
-                }
-            })
 
-            val tabLayout: TabLayout = binding.tabLayout2
-            tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-                override fun onTabSelected(tab: TabLayout.Tab?) {
-                    tab?.let {
-                        binding.apply {
-                            when (it.position) {
-                                0 -> rvMaterial.adapter = ibsfixtureAdapter
-                                1 -> rvMaterial.adapter = ibsabutmentAdapter
-                                2 -> rvMaterial.adapter = osstemfixturetsAdapter
-                                3 -> rvMaterial.adapter = osstemfixturessAdapter
-                                4 -> rvMaterial.adapter = osstemabutmentAdapter
-                            }
+        val tabLayout: TabLayout = binding.tabLayout2
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                tab?.let {
+                    binding.apply {
+                        when (it.position) {
+                            0 -> rvMaterial.adapter = ibsfixtureAdapter
+                            1 -> rvMaterial.adapter = ibsabutmentAdapter
+                            2 -> rvMaterial.adapter = osstemfixturetsAdapter
+                            3 -> rvMaterial.adapter = osstemfixturessAdapter
+                            4 -> rvMaterial.adapter = osstemabutmentAdapter
                         }
-                    } ?: Log.e("InventoryFragment", "Binding is null!")
-                }
+                    }
+                } ?: Log.e("InventoryFragment", "Binding is null!")
+            }
 
-                override fun onTabUnselected(tab: TabLayout.Tab?) {}
-                override fun onTabReselected(tab: TabLayout.Tab?) {}
-            })
-        } ?: Log.e("InventoryFragment", "Binding is null during onViewCreated!")
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+                tab.let {
+                    when (it?.position) {
+                        0 -> binding.rvMaterial.adapter = ibsfixtureAdapter
+                        1 -> binding.rvMaterial.adapter = ibsabutmentAdapter
+                        2 -> binding.rvMaterial.adapter = osstemfixturetsAdapter
+                        3 -> binding.rvMaterial.adapter = osstemfixturessAdapter
+                        4 -> binding.rvMaterial.adapter = osstemabutmentAdapter
+
+                    }
+                }
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                tab.let {
+                    when (it?.position) {
+                        0 -> binding.rvMaterial.adapter = ibsfixtureAdapter
+                        1 -> binding.rvMaterial.adapter = ibsabutmentAdapter
+                        2 -> binding.rvMaterial.adapter = osstemfixturetsAdapter
+                        3 -> binding.rvMaterial.adapter = osstemfixturessAdapter
+                        4 -> binding.rvMaterial.adapter = osstemabutmentAdapter
+
+                    }
+                }
+            }
+        })
+
     }
 
     private fun initView() {
@@ -134,18 +168,20 @@ class Inventory : DialogFragment() {
         binding.rvMaterial.layoutManager = LinearLayoutManager(context)
     }
 
-    private fun initViewModel() = binding.apply {
-            viewModel.getMcData() // 데이터 초기 불러오기
-            Log.d("InventoryFragment", "Observing LiveData")
+    private fun initViewModel() {
+
+        Log.d("InventoryFragment", "Observing LiveData")
         viewModel.items.observe(viewLifecycleOwner) { newList ->
-            Log.d("InventoryFragment", "Observer triggered! New list size: ${newList.size}")
+
             ibsfixtureAdapter.setItems(newList)
             ibsabutmentAdapter.setItems(newList)
             osstemfixturetsAdapter.setItems(newList)
             osstemfixturessAdapter.setItems(newList)
             osstemabutmentAdapter.setItems(newList)
+
         }
     }
+
 
     private fun showItemDetails(item: Mc2.ResultData.Result) {
         _binding?.apply {
@@ -161,5 +197,10 @@ class Inventory : DialogFragment() {
             etQuantitiy.setText(item.quantity.toString())
         } ?: Log.e("ClickedView", "리스트가 클릭되었습니다")
     }
+
+    private fun apiRequest(){
+        viewModel.getMcData()
+    }
+
 }
 
