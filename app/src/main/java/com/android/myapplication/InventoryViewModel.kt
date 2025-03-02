@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.android.myapplication.Data.InsertMc
 import com.android.myapplication.Data.Mc2
 import com.android.myapplication.Data.UpdateMc
 import com.android.myapplication.Service.RetrofitModule
@@ -41,7 +42,7 @@ class InventoryViewModel : ViewModel() {
         })
     }
 
-    fun postMcData(updatedItem: UpdateMc) {
+    fun updateMcdata(updatedItem: UpdateMc) {
         val service = RetrofitModule.createSonnyApiService()
         val call: Call<Void> = service.updateMcdata(updatedItem)
 
@@ -55,6 +56,29 @@ class InventoryViewModel : ViewModel() {
 
                 } else {
                     Log.e("InventoryViewModel", "Update failed: ${response.errorBody()?.string()}")
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Log.e("InventoryViewModel", "API call failed", t)
+            }
+        })
+    }
+
+    fun insertMcdata(insertItem: InsertMc) {
+        val service = RetrofitModule.createSonnyApiService()
+        val call: Call<Void> = service.insertMcdata(insertItem)
+
+        call.enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    Log.d("InventoryViewModel", "Item insert successfully!")
+
+                    // 데이터를 다시 불러와서 LiveData에 업데이트
+                    getMcData()
+
+                } else {
+                    Log.e("InventoryViewModel", "insert failed: ${response.errorBody()?.string()}")
                 }
             }
 

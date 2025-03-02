@@ -55,15 +55,23 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="오스템Ts&#10;[Fixture]"/>
+                android:text="오스템TS&#10;[Fixture]"/>
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="오스템Ss&#10;[Fixture]"/>
+                android:text="오스템SS&#10;[Fixture]"/>
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Osstem &#10; [Abt]"/>
+                android:text="오스템TS &#10; [Abt]"/>
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="오스템SS &#10; [Abt]"/>
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bone"/>
 
         </com.google.android.material.tabs.TabLayout>
 

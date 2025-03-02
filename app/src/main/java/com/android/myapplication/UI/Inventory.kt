@@ -9,12 +9,14 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.myapplication.Adapter.BoneAdapter
 import com.android.myapplication.Adapter.IbsAbutmentAdapter
 import com.android.myapplication.Adapter.IbsFixtureAdapter
-import com.android.myapplication.Adapter.OsstemAbutmentAdapter
+import com.android.myapplication.Adapter.OsstemTSAbutmentAdapter
 import com.android.myapplication.Adapter.OsstemFixtureSSAdapter
 import com.android.myapplication.Adapter.OsstemFixtureTSAdapter
-import com.android.myapplication.Data.DeleteMc
+import com.android.myapplication.Adapter.OsstemSSAbutmentAdapter
+import com.android.myapplication.Data.InsertMc
 import com.android.myapplication.Data.Mc2
 import com.android.myapplication.Data.UpdateMc
 import com.android.myapplication.ViewModel.InventoryViewModel
@@ -33,6 +35,14 @@ class Inventory : Fragment() {
     private var _binding: FragmentFixtureBinding? = null
     private val binding get() = _binding!!
 
+
+    private val dataList1 = mutableListOf<Mc2.ResultData.Result>()
+    private val ibsfixtureAdapter by lazy {
+        IbsFixtureAdapter({ selectedItem -> showItemDetails(selectedItem) }, dataList1)
+    }
+    private val ibsabutmentAdapter: IbsAbutmentAdapter by lazy {
+        IbsAbutmentAdapter { selectedItem -> showItemDetails(selectedItem) }
+    }
     private val osstemfixturetsAdapter: OsstemFixtureTSAdapter by lazy {
         OsstemFixtureTSAdapter { selectedItem -> showItemDetails(selectedItem) }
     }
@@ -42,25 +52,21 @@ class Inventory : Fragment() {
     }
 
 
-    private val dataList1 = mutableListOf<Mc2.ResultData.Result>()
-    private val ibsfixtureAdapter by lazy {
-        IbsFixtureAdapter({ selectedItem -> showItemDetails(selectedItem) }, dataList1)
+    private val osstemtsabutmentAdapter: OsstemTSAbutmentAdapter by lazy {
+        OsstemTSAbutmentAdapter { selectedItem -> showItemDetails(selectedItem) }
     }
-
-
-    private val osstemabutmentAdapter: OsstemAbutmentAdapter by lazy {
-        OsstemAbutmentAdapter { selectedItem -> showItemDetails(selectedItem) }
+    private val osstemssabutmentAdapter: OsstemSSAbutmentAdapter by lazy {
+        OsstemSSAbutmentAdapter { selectedItem -> showItemDetails(selectedItem) }
     }
-
-    private val ibsabutmentAdapter: IbsAbutmentAdapter by lazy {
-        IbsAbutmentAdapter { selectedItem -> showItemDetails(selectedItem) }
+    private val boneAdapter: BoneAdapter by lazy {
+        BoneAdapter { selectedItem -> showItemDetails(selectedItem) }
     }
 
     private val viewModel: InventoryViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //asdf
+
     }
 
     override fun onCreateView(
@@ -78,7 +84,7 @@ class Inventory : Fragment() {
         initView()
         initViewModel()
 
-
+        //Save버튼을 눌렀을때
         binding.btnSave.setOnClickListener {
             val updatedItem = UpdateMc(
                 id = binding.etId.text.toString().toIntOrNull(),
@@ -90,19 +96,27 @@ class Inventory : Fragment() {
                 quantity = binding.etQuantitiy.text.toString().toIntOrNull()
             )
 
+            val insertItem = InsertMc(
+                category = binding.etCategory.text.toString(),
+                code = binding.etCode.text.toString(),
+                diameter = binding.etDiameter.text.toString().toDoubleOrNull(),
+                length = binding.etLength.text.toString().toDoubleOrNull(),
+                name = binding.etName.text.toString(),
+                quantity = binding.etQuantitiy.text.toString().toIntOrNull()
+            )
+
             if (updatedItem.id != null) {
-                viewModel.postMcData(updatedItem)
+                viewModel.updateMcdata(updatedItem)
             } // 🚀 서버에 업데이트 요청
             else {
-                Log.e("Inventory", "Invalid item ID")
+                viewModel.insertMcdata(insertItem)
             }
             binding.Allview.visibility = View.VISIBLE
             binding.viewCliked.visibility = View.GONE
 
         }
 
-        //삭제함수 만들기
-
+        // Delete 하는부분
         binding.tvDelete.setOnClickListener {
             val id = selectedItemId
 
@@ -120,13 +134,25 @@ class Inventory : Fragment() {
         binding.btnAdd.setOnClickListener {
             binding.Allview.visibility = View.GONE
             binding.viewCliked.visibility = View.VISIBLE
+
+            binding.apply {
+                tvDelete.isVisible = false
+                etId.isVisible = false
+                etCode.setText("")
+                etName.setText("")
+                etCategory.setText("")
+                etDiameter.setText("")
+                etLength.setText("")
+                etQuantitiy.setText("")
+
+            }
         }
 
         binding.imgCodyBack.setOnClickListener {
             binding.Allview.isVisible = true
             binding.viewCliked.isVisible = false
         }
-
+        //그림(api조회함수)
         binding.apply {
             bgCody.setOnClickListener {
                 apiRequest()
@@ -144,7 +170,9 @@ class Inventory : Fragment() {
                             1 -> rvMaterial.adapter = ibsabutmentAdapter
                             2 -> rvMaterial.adapter = osstemfixturetsAdapter
                             3 -> rvMaterial.adapter = osstemfixturessAdapter
-                            4 -> rvMaterial.adapter = osstemabutmentAdapter
+                            4 -> rvMaterial.adapter = osstemtsabutmentAdapter
+                            5 -> rvMaterial.adapter = osstemssabutmentAdapter
+                            6 -> rvMaterial.adapter = boneAdapter
                         }
                     }
                 } ?: Log.e("InventoryFragment", "Binding is null!")
@@ -157,7 +185,9 @@ class Inventory : Fragment() {
                         1 -> binding.rvMaterial.adapter = ibsabutmentAdapter
                         2 -> binding.rvMaterial.adapter = osstemfixturetsAdapter
                         3 -> binding.rvMaterial.adapter = osstemfixturessAdapter
-                        4 -> binding.rvMaterial.adapter = osstemabutmentAdapter
+                        4 -> binding.rvMaterial.adapter = osstemtsabutmentAdapter
+                        5 -> binding.rvMaterial.adapter = osstemssabutmentAdapter
+                        6 -> binding.rvMaterial.adapter = boneAdapter
 
                     }
                 }
@@ -170,7 +200,9 @@ class Inventory : Fragment() {
                         1 -> binding.rvMaterial.adapter = ibsabutmentAdapter
                         2 -> binding.rvMaterial.adapter = osstemfixturetsAdapter
                         3 -> binding.rvMaterial.adapter = osstemfixturessAdapter
-                        4 -> binding.rvMaterial.adapter = osstemabutmentAdapter
+                        4 -> binding.rvMaterial.adapter = osstemtsabutmentAdapter
+                        5 -> binding.rvMaterial.adapter = osstemssabutmentAdapter
+                        6 -> binding.rvMaterial.adapter = boneAdapter
 
                     }
                 }
@@ -193,7 +225,9 @@ class Inventory : Fragment() {
             ibsabutmentAdapter.setItems(newList)
             osstemfixturetsAdapter.setItems(newList)
             osstemfixturessAdapter.setItems(newList)
-            osstemabutmentAdapter.setItems(newList)
+            osstemtsabutmentAdapter.setItems(newList)
+            osstemssabutmentAdapter.setItems(newList)
+            boneAdapter.setItems(newList)
 
         }
     }
@@ -203,6 +237,7 @@ class Inventory : Fragment() {
         _binding?.apply {
             Allview.visibility = View.GONE
             viewCliked.visibility = View.VISIBLE
+            tvDelete.isVisible = true
 
             etId.setText(item.id.toString())
             etCategory.setText(item.category.toString())

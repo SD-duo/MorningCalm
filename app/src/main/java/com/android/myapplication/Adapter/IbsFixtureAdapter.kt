@@ -42,7 +42,7 @@ class IbsFixtureAdapter(
 
         fun bindItems(item: Mc2.ResultData.Result) = binding.apply {
             ivImg.load(R.drawable.ibs)
-            tvSize.text = "${item.diameter} ø x ${item.length} mm"
+            tvSize.text = " D: ${item.diameter}  L: ${item.length} "
             tvCode.text = item.code
             tvName.text = item.name
             tvQuantity.text = "재고 : " + item.quantity.toString()
