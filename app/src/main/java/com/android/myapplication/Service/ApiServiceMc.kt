@@ -8,6 +8,8 @@ import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.PUT
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ApiServiceMc {
     @GET("material/selectAll")
@@ -22,8 +24,7 @@ interface ApiServiceMc {
     ): Call<Void>
 
     @DELETE("material/deleteProperty")
-    fun deleteMcdata(
-        @Body deleteMc: DeleteMc
-    ): Call<Void>
+    fun deleteMcdata(@Query("id") id: Int): Call<Void>
+
 
 }

@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.android.myapplication.Data.DeleteMc
 import com.android.myapplication.Data.Mc2
 import com.android.myapplication.Data.UpdateMc
 import com.android.myapplication.Service.RetrofitModule
@@ -65,20 +64,20 @@ class InventoryViewModel : ViewModel() {
         })
     }
 
-    fun deleteMcData(deleteItem: DeleteMc) {
+    fun deleteMcData(id: Int) {
         val service = RetrofitModule.createSonnyApiService()
-        val call: Call<Void> = service.deleteMcdata(deleteItem)
+        val call: Call<Void> = service.deleteMcdata(id) // id만 전달
 
         call.enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (response.isSuccessful) {
-                    Log.d("InventoryViewModel", "Item Delete successfully!")
+                    Log.d("InventoryViewModel", "Item deleted successfully!")
 
-                    // 데이터를 다시 불러와서 LiveData에 업데이트
+                    // 삭제 후 데이터 새로 불러오기
                     getMcData()
 
                 } else {
-                    Log.e("InventoryViewModel", "Update failed: ${response.errorBody()?.string()}")
+                    Log.e("InventoryViewModel", "Delete failed: ${response.errorBody()?.string()}")
                 }
             }
 
