@@ -1,12 +1,14 @@
 package com.android.myapplication.Service
 
 import com.android.myapplication.Data.DeleteMc
+import com.android.myapplication.Data.InsertMc
 import com.android.myapplication.Data.Mc2
 import com.android.myapplication.Data.UpdateMc
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -25,6 +27,11 @@ interface ApiServiceMc {
 
     @DELETE("material/deleteProperty")
     fun deleteMcdata(@Query("id") id: Int): Call<Void>
+
+    @POST("material/insertProperty")
+    fun insertMcdata(
+        @Body insertMc: InsertMc
+    ): Call<Void>
 
 
 }
