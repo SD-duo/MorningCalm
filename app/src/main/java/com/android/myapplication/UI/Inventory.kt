@@ -14,6 +14,7 @@ import com.android.myapplication.Adapter.IbsFixtureAdapter
 import com.android.myapplication.Adapter.OsstemAbutmentAdapter
 import com.android.myapplication.Adapter.OsstemFixtureSSAdapter
 import com.android.myapplication.Adapter.OsstemFixtureTSAdapter
+import com.android.myapplication.Data.DeleteMc
 import com.android.myapplication.Data.Mc2
 import com.android.myapplication.Data.UpdateMc
 import com.android.myapplication.ViewModel.InventoryViewModel
@@ -25,6 +26,9 @@ class Inventory : Fragment() {
     companion object {
         fun newinstance(): Inventory = Inventory()
     }
+
+    private var selectedItemId: Int? = null  // 선택된 아이템 ID 저장 변수
+
 
     private var _binding: FragmentFixtureBinding? = null
     private val binding get() = _binding!!
@@ -97,7 +101,21 @@ class Inventory : Fragment() {
 
         }
 
-        //삭제버튼 만들기
+        //삭제함수 만들기
+
+        binding.tvDelete.setOnClickListener {
+            val id = selectedItemId
+
+            if (id != null) {
+                viewModel.deleteMcData(id)  // 선택된 아이템의 ID만 전달하여 삭제 요청
+                Log.d("Inventory", "Deleting item with ID: $id")
+
+                binding.Allview.visibility = View.VISIBLE
+                binding.viewCliked.visibility = View.GONE
+            } else {
+                Log.e("Inventory", "No item selected for deletion")
+            }
+        }
 
         binding.btnAdd.setOnClickListener {
             binding.Allview.visibility = View.GONE
@@ -178,7 +196,6 @@ class Inventory : Fragment() {
             osstemabutmentAdapter.setItems(newList)
 
         }
-        apiRequest()
     }
 
 
@@ -194,6 +211,8 @@ class Inventory : Fragment() {
             etName.setText(item.name)
             etLength.setText(item.length.toString())
             etQuantitiy.setText(item.quantity.toString())
+
+            selectedItemId = item.id  // 선택된 아이템의 ID 저장
         } ?: Log.e("ClickedView", "리스트가 클릭되었습니다")
     }
 

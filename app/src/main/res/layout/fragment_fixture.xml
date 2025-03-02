@@ -90,10 +90,10 @@
         android:background="@drawable/round_border">
 
         <TextView
-            android:id="@+id/tvTitle"
+            android:id="@+id/tvDelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add Material"
+            android:text="Delete Item"
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_marginBottom="16dp" />
