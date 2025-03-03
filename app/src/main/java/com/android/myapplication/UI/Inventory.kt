@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -91,19 +92,26 @@ class Inventory : Fragment() {
                 category = binding.etCategory.text.toString(),
                 code = binding.etCode.text.toString(),
                 diameter = binding.etDiameter.text.toString().toDoubleOrNull(),
-                length = binding.etLength.text.toString().toDoubleOrNull(),
+                height = binding.etHeight.text.toString().toDoubleOrNull(),
                 name = binding.etName.text.toString(),
-                quantity = binding.etQuantitiy.text.toString().toIntOrNull()
+                quantity = binding.etQuantitiy.text.toString().toIntOrNull(),
+                gheight = binding.etGLength.text.toString().toDoubleOrNull(),
+                cuff = binding.etCuff.text.toString().toIntOrNull(),
+                icode = binding.etIcode.text.toString()
             )
 
             val insertItem = InsertMc(
                 category = binding.etCategory.text.toString(),
                 code = binding.etCode.text.toString(),
                 diameter = binding.etDiameter.text.toString().toDoubleOrNull(),
-                length = binding.etLength.text.toString().toDoubleOrNull(),
+                height = binding.etHeight.text.toString().toDoubleOrNull(),
                 name = binding.etName.text.toString(),
-                quantity = binding.etQuantitiy.text.toString().toIntOrNull()
+                quantity = binding.etQuantitiy.text.toString().toIntOrNull(),
+                gheight = binding.etGLength.text.toString().toDoubleOrNull(),
+                cuff = binding.etCuff.text.toString().toIntOrNull(),
+                icode = binding.etIcode.text.toString()
             )
+
 
             if (updatedItem.id != null) {
                 viewModel.updateMcdata(updatedItem)
@@ -114,6 +122,28 @@ class Inventory : Fragment() {
             binding.Allview.visibility = View.VISIBLE
             binding.viewCliked.visibility = View.GONE
 
+        }
+
+        binding.btnUsed.setOnClickListener {
+            val updatedItem = UpdateMc(
+                id = binding.etId.text.toString().toIntOrNull(),
+                category = binding.etCategory.text.toString(),
+                code = binding.etCode.text.toString(),
+                diameter = binding.etDiameter.text.toString().toDoubleOrNull(),
+                height = binding.etHeight.text.toString().toDoubleOrNull(),
+                name = binding.etName.text.toString(),
+                quantity = binding.etQuantitiy.text.toString().toIntOrNull()?.let { it - 1 } ?: 0, // 수정
+                gheight = binding.etGLength.text.toString().toDoubleOrNull(),
+                cuff = binding.etCuff.text.toString().toIntOrNull(),
+                icode = binding.etIcode.text.toString()
+            )
+
+            viewModel.usedMcdata(updatedItem)
+
+
+            binding.Allview.visibility = View.VISIBLE
+            binding.viewCliked.visibility = View.GONE
+            Toast.makeText(requireContext()," 수량이 1 감소했습니다", Toast.LENGTH_LONG).show()
         }
 
         // Delete 하는부분
@@ -138,11 +168,12 @@ class Inventory : Fragment() {
             binding.apply {
                 tvDelete.isVisible = false
                 etId.isVisible = false
+                etId.setText(null)
                 etCode.setText("")
                 etName.setText("")
                 etCategory.setText("")
                 etDiameter.setText("")
-                etLength.setText("")
+                etHeight.setText("")
                 etQuantitiy.setText("")
 
             }
@@ -244,7 +275,7 @@ class Inventory : Fragment() {
             etDiameter.setText(item.diameter.toString())
             etCode.setText(item.code.toString())
             etName.setText(item.name)
-            etLength.setText(item.length.toString())
+            etHeight.setText(item.height.toString())
             etQuantitiy.setText(item.quantity.toString())
 
             selectedItemId = item.id  // 선택된 아이템의 ID 저장

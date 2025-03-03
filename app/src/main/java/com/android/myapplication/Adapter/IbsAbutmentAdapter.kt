@@ -48,7 +48,7 @@ class IbsAbutmentAdapter(private val onItemClick: (Mc2.ResultData.Result) -> Uni
             ivImg.load(R.drawable.teeth2)
             tvName.text = item?.name
             tvSize.text =
-                item?.diameter.toString() + " ø " + " x " + item?.length.toString() + " mm "
+                item?.diameter.toString() + " ø " + " x " + item?.height.toString() + " mm "
             tvCode.text = item?.code
             tvQuantity.text = "재고 : " + item.quantity.toString()
             root.setOnClickListener {

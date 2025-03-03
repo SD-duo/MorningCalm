@@ -24,12 +24,19 @@ data class Mc2(
             val code: String?,
             @SerializedName("diameter")
             val diameter: Double?,
-            @SerializedName("length")
-            val length: Double?,
+            @SerializedName("height")
+            val height: Double?,
             @SerializedName("name")
             val name: String?,
             @SerializedName("quantity")
             val quantity: Int?,
+            @SerializedName("gheight")
+            val gheight: Double?,
+            @SerializedName("cuff")
+            val cuff: Int?,
+            @SerializedName("icode")
+            val icode: String?,
+
         )
     }
 }
