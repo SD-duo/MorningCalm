@@ -110,5 +110,28 @@ class InventoryViewModel : ViewModel() {
             }
         })
     }
+
+    fun usedMcdata(updatedItem: UpdateMc) {
+        val service = RetrofitModule.createSonnyApiService()
+        val call: Call<Void> = service.usedMcdata(updatedItem)
+
+        call.enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    Log.d("InventoryViewModel", "Item updated successfully!")
+
+                    // 데이터를 다시 불러와서 LiveData에 업데이트
+                    getMcData()
+
+                } else {
+                    Log.e("InventoryViewModel", "Update failed: ${response.errorBody()?.string()}")
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Log.e("InventoryViewModel", "API call failed", t)
+            }
+        })
+    }
 }
 

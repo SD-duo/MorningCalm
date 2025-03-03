@@ -5,6 +5,9 @@ data class InsertMc(
     val code: String?,
     val name: String?,
     val diameter: Double?,
-    val length: Double?,
+    val height: Double?,
     val quantity: Int?,
+    val gheight: Double?,
+    val cuff: Int?,
+    val icode: String?,
 )

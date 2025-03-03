@@ -33,5 +33,10 @@ interface ApiServiceMc {
         @Body insertMc: InsertMc
     ): Call<Void>
 
+    @PUT("material/updateQuantity")
+    fun usedMcdata(
+        @Body requestMc: UpdateMc
+    ): Call<Void>
+
 
 }

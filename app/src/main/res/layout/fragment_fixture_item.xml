@@ -53,6 +53,13 @@
             android:text="Code"
             android:textSize="14sp"
             android:textStyle="bold" />
+<!--        <androidx.appcompat.widget.AppCompatTextView-->
+<!--            android:id="@+id/tv_icode"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="보험코드"-->
+<!--            android:textSize="14sp"-->
+<!--            android:textStyle="bold" />-->
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_quantity"
