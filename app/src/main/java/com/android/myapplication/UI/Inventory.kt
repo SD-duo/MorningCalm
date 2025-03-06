@@ -23,6 +23,8 @@ import com.android.myapplication.Data.UpdateMc
 import com.android.myapplication.ViewModel.InventoryViewModel
 import com.android.myapplication.databinding.FragmentFixtureBinding
 import com.google.android.material.tabs.TabLayout
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 class Inventory : Fragment() {
@@ -97,7 +99,9 @@ class Inventory : Fragment() {
                 quantity = binding.etQuantitiy.text.toString().toIntOrNull(),
                 gheight = binding.etGLength.text.toString().toDoubleOrNull(),
                 cuff = binding.etCuff.text.toString().toIntOrNull(),
-                icode = binding.etIcode.text.toString()
+                icode = binding.etIcode.text.toString(),
+                update_at = getCurrentDateTime()
+
             )
 
             val insertItem = InsertMc(
@@ -109,7 +113,9 @@ class Inventory : Fragment() {
                 quantity = binding.etQuantitiy.text.toString().toIntOrNull(),
                 gheight = binding.etGLength.text.toString().toDoubleOrNull(),
                 cuff = binding.etCuff.text.toString().toIntOrNull(),
-                icode = binding.etIcode.text.toString()
+                icode = binding.etIcode.text.toString(),
+                update_at = getCurrentDateTime()
+
             )
 
 
@@ -132,10 +138,12 @@ class Inventory : Fragment() {
                 diameter = binding.etDiameter.text.toString().toDoubleOrNull(),
                 height = binding.etHeight.text.toString().toDoubleOrNull(),
                 name = binding.etName.text.toString(),
-                quantity = binding.etQuantitiy.text.toString().toIntOrNull()?.let { it - 1 } ?: 0, // 수정
+                quantity = binding.etQuantitiy.text.toString().toIntOrNull()?.let { it - 1 }
+                    ?: 0, // 수정
                 gheight = binding.etGLength.text.toString().toDoubleOrNull(),
                 cuff = binding.etCuff.text.toString().toIntOrNull(),
-                icode = binding.etIcode.text.toString()
+                icode = binding.etIcode.text.toString(),
+                update_at = getCurrentDateTime()
             )
 
             viewModel.usedMcdata(updatedItem)
@@ -143,7 +151,7 @@ class Inventory : Fragment() {
 
             binding.Allview.visibility = View.VISIBLE
             binding.viewCliked.visibility = View.GONE
-            Toast.makeText(requireContext()," 수량이 1 감소했습니다", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), " 수량이 1 감소했습니다", Toast.LENGTH_LONG).show()
         }
 
         // Delete 하는부분
@@ -183,7 +191,7 @@ class Inventory : Fragment() {
             binding.Allview.isVisible = true
             binding.viewCliked.isVisible = false
         }
-        //그림(api조회함수)
+        //그림(api조회)
         binding.apply {
             bgCody.setOnClickListener {
                 apiRequest()
@@ -249,6 +257,10 @@ class Inventory : Fragment() {
 
     private fun initViewModel() {
 
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            binding.laoutLoading.isVisible = isLoading  // 🚀 로딩 이미지 표시/숨김 true면 보이고 false면 안보임
+        }
+
         Log.d("InventoryFragment", "Observing LiveData")
         viewModel.items.observe(viewLifecycleOwner) { newList ->
 
@@ -282,9 +294,16 @@ class Inventory : Fragment() {
         } ?: Log.e("ClickedView", "리스트가 클릭되었습니다")
     }
 
-    private fun apiRequest(){
+    private fun apiRequest() {
         viewModel.getMcData()
     }
+
+    fun getCurrentDateTime(): String {
+        val current = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
+        return current.format(formatter)
+    }
+
 
 }
 

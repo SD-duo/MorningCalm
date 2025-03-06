@@ -36,6 +36,8 @@ data class Mc2(
             val cuff: Int?,
             @SerializedName("icode")
             val icode: String?,
+            @SerializedName("updateAt")
+            val update_at: String
 
         )
     }

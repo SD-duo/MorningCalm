@@ -11,8 +11,23 @@
         android:id="@+id/Allview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
         android:orientation="vertical"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:gravity="center">
+        <LinearLayout
+            android:id="@+id/laout_loading"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:visibility="gone">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/loading"/>
+
+        </LinearLayout>
     <!--    추가버튼    -->
         <ImageView
             android:id="@+id/btn_Add"
@@ -230,4 +245,5 @@
 
 
     </LinearLayout>
+
 </LinearLayout>

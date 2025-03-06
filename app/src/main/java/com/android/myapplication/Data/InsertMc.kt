@@ -10,4 +10,5 @@ data class InsertMc(
     val gheight: Double?,
     val cuff: Int?,
     val icode: String?,
+    val update_at:String
 )

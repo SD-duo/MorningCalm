@@ -13,6 +13,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class InventoryViewModel : ViewModel() {
+
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> get() = _isLoading
     //commit test
     private val _items = MutableLiveData<List<Mc2.ResultData.Result>>()
     val items: LiveData<List<Mc2.ResultData.Result>>
@@ -20,6 +23,8 @@ class InventoryViewModel : ViewModel() {
 
 
     fun getMcData() {
+        _isLoading.value = true  // 🚀 로딩 시작
+
         val service = RetrofitModule.createSonnyApiService()
         val call: Call<Mc2> = service.getMcdata()
 
@@ -30,14 +35,15 @@ class InventoryViewModel : ViewModel() {
                     val resultList =
                         responseBody?.resultData?.result?.filterNotNull() ?: emptyList()
 
-                    _items.value = resultList!!
+                    _items.value = resultList
                     Log.d("InventoryViewModel", "getMcData()가 호출됨")
-
                 }
+                _isLoading.value = false  // 🚀 로딩 완료
             }
 
             override fun onFailure(call: Call<Mc2>, t: Throwable) {
                 Log.e("InventoryViewModel", "API call failed", t)
+                _isLoading.value = false  // 🚀 실패 시에도 로딩 종료
             }
         })
     }

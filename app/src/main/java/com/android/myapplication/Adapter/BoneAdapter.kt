@@ -48,7 +48,13 @@ class BoneAdapter(
 
         fun bindItems(item: Mc2.ResultData.Result) = binding.apply {
 
-            ivImg.load(R.drawable.bone) // Bone이미지
+            when(item?.diameter){
+                0.0 -> ivImg.load(R.drawable.osteon)
+                3.0 -> ivImg.load(R.drawable.sureoss)
+                4.0 -> ivImg.load(R.drawable.ibs)
+                5.0 -> ivImg.load(R.drawable.tg2)
+
+            }
             tvName.text = item?.name // 이름
             tvQuantity.text = "재고 : " + item.quantity.toString()
             tvSize.isVisible = false

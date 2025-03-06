@@ -12,5 +12,6 @@ data class UpdateMc(
     val height: Double?,
     val gheight: Double?,
     val quantity: Int?,
+    val update_at: String
 )
 
