@@ -87,6 +87,9 @@ class Inventory : Fragment() {
         initView()
         initViewModel()
 
+        //저장하시겠습니까? 만들기
+        // 사용후 수량표기 (수량이 1감소하였습니다 -> 수량이 26 -> 25 로 감소 하였습니다.)
+
         //Save버튼을 눌렀을때
         binding.btnSave.setOnClickListener {
             val updatedItem = UpdateMc(
@@ -178,10 +181,13 @@ class Inventory : Fragment() {
                 etId.isVisible = false
                 etId.setText(null)
                 etCode.setText("")
+                etIcode.setText("")
                 etName.setText("")
                 etCategory.setText("")
+                etCuff.setText("")
                 etDiameter.setText("")
                 etHeight.setText("")
+                etGLength.setText("")
                 etQuantitiy.setText("")
 
             }

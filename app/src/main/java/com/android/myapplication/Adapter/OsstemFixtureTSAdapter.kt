@@ -48,7 +48,7 @@ class OsstemFixtureTSAdapter(private val onItemClick: (Mc2.ResultData.Result) ->
             tvName.text = item?.name
             tvSize.text =
                 item?.diameter.toString() + " ø " + " x " + item?.height.toString() + " mm "
-            tvCode.text = item.code
+            tvCode.text = item.icode
             tvQuantity.text = "재고 : " + item.quantity.toString()
 
             root.setOnClickListener {
