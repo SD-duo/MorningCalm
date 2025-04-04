@@ -59,6 +59,7 @@ class BoneAdapter(
             tvQuantity.text = "재고 : " + item.quantity.toString()
             tvSize.isVisible = false
             tvCode.isVisible = false
+            tvTempo1.text = " ${item?.update_at}"
             root.setOnClickListener {
                 onItemClick(item) // 클릭된 아이템을 리스너로 전달
                 Log.d("ClickedView", "오스템 어버트먼트 어뎁터에서 아이템 클릭됨: ${item.name}")

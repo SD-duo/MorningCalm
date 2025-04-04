@@ -47,11 +47,12 @@ class OsstemSSAbutmentAdapter(
 
         fun bindItems(item: Mc2.ResultData.Result) = binding.apply {
 
-            ivImg.load(R.drawable.teeth1)
+            ivImg.load(R.drawable.ssabt)
             tvName.text = item?.name
             tvSize.text =
-                item?.diameter.toString() + " ø " + " x " + item?.height.toString() + " mm "
+                item?.diameter.toString() + " ø " + " x " + item?.height.toString() + " mm " + item?.gheight.toString() + " G/H"
             tvQuantity.text = "재고 : " + item.quantity.toString()
+            tvTempo1.text = " ${item?.update_at}"
             root.setOnClickListener {
                 onItemClick(item) // 클릭된 아이템을 리스너로 전달
                 Log.d("ClickedView", "오스템 어버트먼트 어뎁터에서 아이템 클릭됨: ${item.name}")

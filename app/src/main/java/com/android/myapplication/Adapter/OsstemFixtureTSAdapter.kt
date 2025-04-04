@@ -44,12 +44,13 @@ class OsstemFixtureTSAdapter(private val onItemClick: (Mc2.ResultData.Result) ->
         fun bindItems(item: Mc2.ResultData.Result) = binding.apply {
 
 
-            ivImg.load(R.drawable.fixture_ts)
+            ivImg.load(R.drawable.tsfixture)
             tvName.text = item?.name
             tvSize.text =
                 item?.diameter.toString() + " ø " + " x " + item?.height.toString() + " mm "
             tvCode.text = item.icode
             tvQuantity.text = "재고 : " + item.quantity.toString()
+            tvTempo1.text = " ${item?.update_at}"
 
             root.setOnClickListener {
             onItemClick(item)

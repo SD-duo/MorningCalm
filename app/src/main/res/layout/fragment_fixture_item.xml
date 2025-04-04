@@ -79,27 +79,26 @@
         android:gravity="center"
         app:layout_constraintStart_toEndOf="@id/layout_item"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:visibility="gone">
-
-        <Button
-            android:id="@+id/tv_temporary"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <TextView
+            android:layout_width="67dp"
+            android:layout_height="35dp"
+            android:textStyle="bold"
+            android:textSize="10sp"
+            android:text="최근 수정일자"
+            android:gravity="center"
+            android:backgroundTint="@color/DeleteRed" />
+        <TextView
+            android:id="@+id/tv_tempo1"
             android:layout_width="67dp"
             android:layout_height="35dp"
             android:layout_marginBottom="8dp"
             android:textStyle="bold"
             android:textSize="10sp"
-            android:text="사용"
+            android:gravity="center"
             android:backgroundTint="@color/Green"/>
-        <Button
-            android:layout_width="67dp"
-            android:layout_height="35dp"
-            android:textStyle="bold"
-            android:textSize="10sp"
-            android:text="삭제"
-            android:backgroundTint="@color/DeleteRed"/>
+
     </LinearLayout>
->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

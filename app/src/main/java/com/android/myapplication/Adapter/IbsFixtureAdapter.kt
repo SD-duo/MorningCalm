@@ -46,6 +46,7 @@ class IbsFixtureAdapter(
             tvCode.text = item.code
             tvName.text = item.name
             tvQuantity.text = "재고 : " + item.quantity.toString()
+            tvTempo1.text = " ${item?.update_at}"
 
             root.setOnClickListener {
 

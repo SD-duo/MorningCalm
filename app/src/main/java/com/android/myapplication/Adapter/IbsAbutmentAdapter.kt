@@ -51,6 +51,7 @@ class IbsAbutmentAdapter(private val onItemClick: (Mc2.ResultData.Result) -> Uni
                 item?.diameter.toString() + " ø " + " x " + item?.height.toString() + " mm "
             tvCode.text = item?.code
             tvQuantity.text = "재고 : " + item.quantity.toString()
+            tvTempo1.text = " ${item?.update_at}"
             root.setOnClickListener {
                 onItemClick(item) // 클릭된 아이템을 리스너로 전달
             }

@@ -2,12 +2,14 @@ package com.android.myapplication.Adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.android.myapplication.Data.Mc2
 import com.android.myapplication.R
 import com.android.myapplication.databinding.FragmentFixtureItemBinding
 
+//TS Healing 으로 대체
 class OsstemFixtureSSAdapter(private val onItemClick: (Mc2.ResultData.Result) -> Unit) :
     RecyclerView.Adapter<OsstemFixtureSSAdapter.ViewHolder>() {
 
@@ -44,12 +46,13 @@ class OsstemFixtureSSAdapter(private val onItemClick: (Mc2.ResultData.Result) ->
         fun bindItems(item: Mc2.ResultData.Result) = binding.apply {
 
 
-            ivImg.load(R.drawable.ss)
+            ivImg.load(R.drawable.tshealing)
             tvName.text = item?.name
             tvSize.text =
                 item?.diameter.toString() + " ø " + " x " + item?.height.toString() + " mm "
-            tvCode.text = item?.code
             tvQuantity.text = "재고 : " + item.quantity.toString()
+            tvCode.isVisible = false
+            tvTempo1.text = " ${item?.update_at}"
 
             root.setOnClickListener {
                 onItemClick(item)

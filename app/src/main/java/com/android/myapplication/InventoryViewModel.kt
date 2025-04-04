@@ -21,7 +21,7 @@ class InventoryViewModel : ViewModel() {
     val items: LiveData<List<Mc2.ResultData.Result>>
         get() = _items
 
-
+   // Delay 60 m/s
     fun getMcData() {
         _isLoading.value = true  // 🚀 로딩 시작
 
