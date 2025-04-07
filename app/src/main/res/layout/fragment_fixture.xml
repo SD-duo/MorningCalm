@@ -14,7 +14,8 @@
         android:layout_marginTop="20dp"
         android:orientation="vertical"
         android:background="@color/white"
-        android:gravity="center">
+        android:gravity="center"
+        android:visibility="visible">
         <LinearLayout
             android:id="@+id/laout_loading"
             android:layout_width="100dp"
@@ -140,24 +141,6 @@
             android:padding="10dp"
             android:layout_marginTop="12dp" />
         <EditText
-            android:id="@+id/et_code"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:gravity="center"
-            android:hint="code가 들어갈 자리"
-            android:background="@android:drawable/editbox_background"
-            android:padding="10dp"
-            android:layout_marginTop="12dp"/>
-        <EditText
-            android:id="@+id/et_Icode"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:gravity="center"
-            android:hint="보험코드가 들어갈 자리"
-            android:background="@android:drawable/editbox_background"
-            android:padding="10dp"
-            android:layout_marginTop="12dp"/>
-        <EditText
             android:id="@+id/et_name"
             android:layout_width="200dp"
             android:layout_height="50dp"
@@ -166,42 +149,88 @@
             android:background="@android:drawable/editbox_background"
             android:padding="10dp"
             android:layout_marginTop="12dp"/>
-        <EditText
-            android:id="@+id/et_Cuff"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:hint="Cuff"
-            android:background="@android:drawable/editbox_background"
-            android:padding="10dp"
-            android:layout_marginTop="12dp"/>
-        <EditText
-            android:id="@+id/et_diameter"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/et_code"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:hint="code가 들어갈 자리"
+                android:background="@android:drawable/editbox_background"
+                android:padding="10dp"
+                android:layout_marginTop="12dp"/>
+            <EditText
+                android:id="@+id/et_Icode"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:hint="보험코드"
+                android:background="@android:drawable/editbox_background"
+                android:padding="10dp"
+                android:layout_marginTop="12dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:hint="diameter"
-            android:background="@android:drawable/editbox_background"
             android:padding="10dp"
-            android:layout_marginTop="12dp"/>
-        <EditText
-            android:id="@+id/et_Height"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/et_diameter"
+                android:layout_width="180dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:hint="diameter"
+                android:background="@android:drawable/editbox_background"
+                android:padding="10dp"
+                android:layout_marginTop="12dp"/>
+            <EditText
+                android:id="@+id/et_Height"
+                android:layout_width="180dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:hint="Height"
+                android:background="@android:drawable/editbox_background"
+                android:padding="10dp"
+                android:layout_marginTop="12dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:hint="Height"
-            android:background="@android:drawable/editbox_background"
             android:padding="10dp"
-            android:layout_marginTop="12dp"/>
-        <EditText
-            android:id="@+id/et_GLength"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:gravity="center"
-            android:hint="G/H"
-            android:background="@android:drawable/editbox_background"
-            android:padding="10dp"
-            android:layout_marginTop="12dp"/>
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/et_Cuff"
+                android:layout_width="180dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:hint="Cuff"
+                android:background="@android:drawable/editbox_background"
+                android:padding="10dp"
+                android:layout_marginTop="12dp"/>
+
+            <EditText
+                android:id="@+id/et_GLength"
+                android:layout_width="180dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:hint="G/H"
+                android:background="@android:drawable/editbox_background"
+                android:padding="10dp"
+                android:layout_marginTop="12dp"/>
+
+        </LinearLayout>
+
         <EditText
             android:id="@+id/et_quantitiy"
             android:layout_width="200dp"
@@ -212,7 +241,7 @@
             android:padding="10dp"
             android:layout_marginTop="12dp"/>
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center">

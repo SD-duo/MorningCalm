@@ -50,6 +50,7 @@ class BoneAdapter(
 
             when(item?.diameter){
                 0.0 -> ivImg.load(R.drawable.osteon)
+                1.0 -> ivImg.load(R.drawable.osteon)
                 3.0 -> ivImg.load(R.drawable.sureoss)
                 4.0 -> ivImg.load(R.drawable.ibs)
                 5.0 -> ivImg.load(R.drawable.tg2)
