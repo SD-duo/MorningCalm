@@ -132,7 +132,7 @@ class Inventory : Fragment() {
             binding.viewCliked.visibility = View.GONE
 
         }
-
+    // 사용시 수량 -1
         binding.btnUsed.setOnClickListener {
             val updatedItem = UpdateMc(
                 id = binding.etId.text.toString().toIntOrNull(),
@@ -175,6 +175,7 @@ class Inventory : Fragment() {
         binding.btnAdd.setOnClickListener {
             binding.Allview.visibility = View.GONE
             binding.viewCliked.visibility = View.VISIBLE
+
 
             binding.apply {
                 tvDelete.isVisible = false
@@ -292,8 +293,11 @@ class Inventory : Fragment() {
             etCategory.setText(item.category.toString())
             etDiameter.setText(item.diameter.toString())
             etCode.setText(item.code.toString())
+            etIcode.setText(item.icode.toString())
             etName.setText(item.name)
             etHeight.setText(item.height.toString())
+            etCuff.setText(item.cuff.toString())
+            etGLength.setText(item.gheight.toString())
             etQuantitiy.setText(item.quantity.toString())
 
             selectedItemId = item.id  // 선택된 아이템의 ID 저장
